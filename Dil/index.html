@@ -645,13 +645,14 @@ Teruskan ke Quotation →
     }
 
     function buildDilTakafulURL(result) {
-        const url = new URL(DILTAKAFUL_URL);
-        url.searchParams.set('hibah',   result.hibah);
-        url.searchParams.set('umur',    result.umur);      // ← umur sebenar (nombor)
-        url.searchParams.set('gender',  result.gender);
-        url.searchParams.set('caruman', result.caruman);
-        return url.toString();
-    }
+    const base = window.location.href.replace(/\/[^\/]*$/, '/');
+    const url = new URL(DILTAKAFUL_URL, base); // ✅ guna base URL semasa
+    url.searchParams.set('hibah',   result.hibah);
+    url.searchParams.set('umur',    result.umur);
+    url.searchParams.set('gender',  result.gender);
+    url.searchParams.set('caruman', result.caruman);
+    return url.toString();
+}
 
     function buildWhatsAppURL(product, gender, age, premium) {
         const msg = `Salam%2C%20saya%20nak%20tanya%20tentang%20*${encodeURIComponent(product)}*%0AJantina%3A%20${gender}%0AUmur%3A%20${age}%20tahun%0ASumbangan%20anggaran%3A%20${encodeURIComponent(premium)}`;
