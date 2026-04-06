@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KlikTakaful — Konsultasi Takaful Bebas & Telus</title>
+  <meta name="description" content="Dapatkan nasihat Takaful yang bebas dan telus dari penasihat bertauliah BNM. Bandingkan 9 syarikat serentak. Percuma, tanpa obligasi."/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #080c10;
+      --white: #f4f1eb;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --gold-glow: rgba(201,168,76,0.35);
+      --surface: #0d1218;
+      --surface2: #131a22;
+      --muted: rgba(244,241,235,0.55);
+      --border: rgba(201,168,76,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.5rem 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(8,12,16,0.95), transparent);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--gold-dim);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 6% 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Radial glow bg */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Grid lines */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--gold); letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--gold-dim);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 2rem;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+
+    .hero h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      justify-content: center;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--gold);
+      color: var(--black);
+      padding: 1rem 2.2rem;
+      border-radius: 4px;
+      font-weight: 700; font-size: 0.9rem;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+      box-shadow: 0 0 30px var(--gold-glow);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px var(--gold-glow);
+    }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 1rem 2.2rem;
+      border-radius: 4px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+      background: rgba(255,255,255,0.03);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      padding: 3rem 6%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    /* HOW IT WORKS */
+    .section { padding: 7rem 6%; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 60px;
+    }
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+      border: 1px solid var(--border);
+    }
+    .step-card {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .step-card:hover { background: var(--surface2); }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .step-card:hover::before { transform: scaleX(1); }
+    .step-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .step-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .step-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+    .step-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* WHY */
+    .why-section {
+      padding: 7rem 6%;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+    .why-left h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .why-left h2 em { font-style: italic; color: var(--gold); }
+    .why-left p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .why-points { display: flex; flex-direction: column; gap: 1rem; }
+    .why-point {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(201,168,76,0.03);
+      transition: all 0.3s;
+    }
+    .why-point:hover {
+      border-color: rgba(201,168,76,0.4);
+      background: var(--gold-dim);
+    }
+    .why-point-icon {
+      width: 36px; height: 36px;
+      border-radius: 4px;
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .why-point h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .why-point p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-weight: 300; }
+
+    /* Right side - big quote */
+    .why-right {
+      position: relative;
+    }
+    .quote-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.5rem; left: 1.5rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 8rem;
+      color: var(--gold);
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .quote-text {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .quote-author {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .stat-badge {
+      position: absolute;
+      bottom: -1px; right: -1px;
+      background: var(--gold);
+      color: var(--black);
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ADVISORS */
+    .advisors-section { padding: 7rem 6%; }
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+      border: 1px solid var(--border);
+    }
+    .advisor-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--white);
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    .advisor-card::after {
+      content: '→';
+      position: absolute;
+      bottom: 2rem; right: 2rem;
+      font-size: 1.2rem;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s;
+    }
+    .advisor-card:hover { background: var(--surface2); }
+    .advisor-card:hover::after { opacity: 1; transform: translateX(0); }
+    .advisor-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .advisor-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .advisor-title {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .advisor-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .advisor-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      background: var(--gold-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* CTA BANNER */
+    .cta-section {
+      padding: 7rem 6%;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      position: relative; z-index: 1;
+    }
+    .cta-section h2 em { font-style: italic; color: var(--gold); }
+    .cta-section p {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      position: relative; z-index: 1;
+    }
+    .cta-btns {
+      display: flex; gap: 1rem;
+      justify-content: center; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+
+    /* PARTNERS */
+    .partners-section {
+      padding: 3rem 6%;
+      border-top: 1px solid var(--border);
+    }
+    .partners-label {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .partners-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+    .partner-pill {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+    }
+    .partner-pill:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 6% 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .logo {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+    footer .logo span { color: var(--gold); }
+    footer p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    footer a {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .advisors-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Klik<span>Takaful</span></a>
+  <div class="nav-badge">Firma Berdaftar BNM</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">Konsultasi Percuma · Tanpa Obligasi</div>
+  <h1>Takaful Yang <em>Tepat</em><br/>Untuk Anda</h1>
+  <p class="hero-sub">Kami bukan wakil satu syarikat. Kami wakil <strong>anda</strong> — bandingkan 9 syarikat Takaful serentak dan dapatkan pelan terbaik mengikut keperluan sebenar anda.</p>
+  <div class="hero-ctas">
+    <a href="#konsultasi" class="btn-primary">Mula Konsultasi Percuma</a>
+    <a href="#cara-kerja" class="btn-secondary">Bagaimana Kami Bekerja</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item reveal">
+    <div class="stat-num">9</div>
+    <div class="stat-label">Syarikat Takaful Dibandingkan</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Bebas & Tidak Berpihak</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">RM0</div>
+    <div class="stat-label">Kos Konsultasi</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">24j</div>
+    <div class="stat-label">Respon Dalam Masa</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="cara-kerja">
+  <div class="section-label">Proses</div>
+  <h2 class="section-title reveal">Mudah Dalam<br/>4 Langkah</h2>
+  <p class="section-sub reveal">Dari konsultasi hingga polisi aktif — kami uruskan kesemuanya.</p>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <div class="step-icon">🧮</div>
+      <h3>Kira Keperluan</h3>
+      <p>Gunakan kalkulator kami untuk tahu nilai perlindungan dan anggaran caruman yang sesuai dengan profil anda.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">02</div>
+      <div class="step-icon">📋</div>
+      <h3>Isi Borang Ringkas</h3>
+      <p>Ambil masa kurang 2 minit. Kami perlukan maklumat asas untuk sediakan sebut harga yang tepat.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">03</div>
+      <div class="step-icon">⚖️</div>
+      <h3>Terima Perbandingan</h3>
+      <p>Penasihat kami bandingkan pelan dari 9 syarikat dan hantar cadangan terbaik terus ke WhatsApp anda.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">04</div>
+      <div class="step-icon">🛡️</div>
+      <h3>Polisi Aktif</h3>
+      <p>Kelulusan sepantas 24-48 jam. Keluarga anda dilindungi sepenuhnya tanpa sebarang tekanan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="kenapa">
+  <div class="why-grid">
+    <div class="why-left">
+      <div class="section-label">Kenapa KlikTakaful</div>
+      <h2 class="reveal">Kami Bekerja<br/>Untuk <em>Anda</em></h2>
+      <p class="reveal">Ejen Takaful biasa terikat dengan satu syarikat. Kami tidak. Sebagai Penasihat Kewangan Bebas (IFAR) berdaftar BNM, keutamaan kami adalah kepentingan anda — bukan komisyen syarikat.</p>
+      <div class="why-points">
+        <div class="why-point reveal">
+          <div class="why-point-icon">🏛️</div>
+          <div>
+            <h4>Berdaftar & Dikawal BNM</h4>
+            <p>Firma kami berlesen di bawah Bank Negara Malaysia. Anda dilindungi dari segi undang-undang.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-icon">🔍</div>
+          <div>
+            <h4>Analisis Bebas & Telus</h4>
+            <p>Kami tunjukkan perbandingan sebenar — termasuk kelemahan setiap pelan. Tiada yang disembunyikan.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-icon">💬</div>
+          <div>
+            <h4>Sokongan Jangka Panjang</h4>
+            <p>Hubungan kami tidak berakhir selepas polisi aktif. Kami sentiasa ada untuk semakan dan pertanyaan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-right reveal">
+      <div class="quote-card">
+        <p class="quote-text">"Lebih RM90 bilion harta pusaka di Malaysia masih beku kerana tiada perancangan perlindungan yang betul. Jangan biarkan keluarga anda menjadi statistik."</p>
+        <div class="quote-author">— Statistik Amanah Raya Berhad</div>
+        <div class="stat-badge">RM90 Bilion Harta Beku</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORS -->
+<section class="advisors-section" id="konsultasi">
+  <div class="section-label">Penasihat Kami</div>
+  <h2 class="section-title reveal">Pilih Penasihat<br/>Anda</h2>
+  <p class="section-sub reveal">Setiap penasihat kami adalah bertauliah dan berpengalaman. Pilih yang paling sesuai dengan anda.</p>
+
+  <div class="advisors-grid">
+    <a href="/Dil/" class="advisor-card reveal">
+      <div class="advisor-avatar">D</div>
+      <div class="advisor-name">Aswadil Amin</div>
+      <div class="advisor-title">Associate Advisor</div>
+      <p class="advisor-desc">Pakar Hibah Takaful & Medical Card. Membantu lebih 372 keluarga merancang perlindungan kewangan yang tepat.</p>
+      <span class="advisor-tag">Hibah Takaful · Medical Card</span>
+    </a>
+
+    <div class="advisor-card reveal" style="opacity:0.5; pointer-events:none;">
+      <div class="advisor-avatar" style="opacity:0.4;">+</div>
+      <div class="advisor-name" style="color:var(--muted);">Penasihat Baru</div>
+      <div class="advisor-title">Akan Datang</div>
+      <p class="advisor-desc">Kami sedang mengembangkan pasukan. Hubungi kami jika anda berminat untuk menyertai KlikTakaful.</p>
+      <span class="advisor-tag">Segera</span>
+    </div>
+
+    <div class="advisor-card reveal" style="opacity:0.5; pointer-events:none;">
+      <div class="advisor-avatar" style="opacity:0.4;">+</div>
+      <div class="advisor-name" style="color:var(--muted);">Penasihat Baru</div>
+      <div class="advisor-title">Akan Datang</div>
+      <p class="advisor-desc">Kami sedang mengembangkan pasukan. Hubungi kami jika anda berminat untuk menyertai KlikTakaful.</p>
+      <span class="advisor-tag">Segera</span>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners-section">
+  <p class="partners-label">Syarikat Takaful Yang Kami Bandingkan</p>
+  <div class="partners-row">
+    <span class="partner-pill">Etiqa Takaful</span>
+    <span class="partner-pill">AIA Public Takaful</span>
+    <span class="partner-pill">Prudential BSN Takaful</span>
+    <span class="partner-pill">Great Eastern Takaful</span>
+    <span class="partner-pill">Zurich Takaful</span>
+    <span class="partner-pill">Takaful Ikhlas</span>
+    <span class="partner-pill">Hong Leong MSIG Takaful</span>
+    <span class="partner-pill">Sun Life Malaysia Takaful</span>
+    <span class="partner-pill">HSBC Amanah Takaful</span>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="reveal">Mula Hari Ini.<br/><em>Percuma.</em></h2>
+  <p class="reveal">Tiada komitmen. Tiada tekanan. Hanya nasihat yang jujur.</p>
+  <div class="cta-btns reveal">
+    <a href="/Dil/" class="btn-primary">Kira Keperluan Saya</a>
+    <a href="https://wa.me/60132124592?text=Assalamualaikum%2C+saya+ingin+konsultasi+Takaful+percuma." class="btn-secondary">💬 WhatsApp Terus</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Klik<span>Takaful</span></div>
+  <p>© 2026 KlikTakaful. Firma Berdaftar BNM. Hak Cipta Terpelihara.</p>
+  <a href="https://wa.me/60132124592">Hubungi Kami</a>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
