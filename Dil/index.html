@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+
+<html lang="ms">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KlikTakaful | Takaful untuk anda dengan satu klik</title>
+
+<style>
+
+:root {
+
+--primary: #1a3a5f;
+
+--secondary: #2c5aa0;
+
+--accent: #4caf50;
+
+--light: #f8f9fa;
+
+--dark: #343a40;
+
+--gray: #6c757d;
+
+--border-radius: 8px;
+
+--box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f5f7fa; color: var(--dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+header { background-color: var(--primary); color: white; padding: 1rem 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; }
+        .logo span { color: var(--accent); }
+        .tagline { font-size: 0.9rem; opacity: 0.8; margin-top: 0.2rem; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; padding: 0.5rem 0; position: relative; }
+        nav ul li a:hover { color: var(--accent); }
+        nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent); transition: width 0.3s; }
+        nav ul li a:hover::after { width: 100%; }
+
+.hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 4rem 0; text-align: center; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; }
+
+.btn { display: inline-block; background-color: var(--accent); color: white; padding: 0.8rem 1.5rem; border-radius: var(--border-radius); text-decoration: none; font-weight: 600; transition: all 0.3s; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .btn:hover { background-color: #3d8c40; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+
+.btn-wa { background-color: #25D366; }
+        .btn-wa:hover { background-color: #128c7e; }
+        .btn-hibah { background-color: #f59e0b; color: #000; }
+        .btn-hibah:hover { background-color: #d97706; color: #000; }
+
+.calculator-section { padding: 4rem 0; background-color: white; }
+        .section-title { text-align: center; margin-bottom: 3rem; color: var(--primary); position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background-color: var(--accent); margin: 0.5rem auto; border-radius: 2px; }
+
+.calculator-container { display: flex; flex-wrap: wrap; gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .calculator-form { flex: 1; min-width: 300px; background-color: var(--light); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .calculator-results { flex: 1; min-width: 300px; background-color: var(--light); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+
+.form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary); }
+        select { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-size: 1rem; background-color: white; transition: border-color 0.3s; }
+        select:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 2px rgba(44,90,160,0.2); }
+
+.result-item { margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd; }
+        .result-label { font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; }
+        .result-value { font-size: 1.2rem; color: var(--secondary); }
+
+.highlight { background-color: var(--primary); color: white; padding: 1.5rem; border-radius: var(--border-radius); text-align: center; margin-top: 1rem; }
+        .highlight p { margin-bottom: 0.5rem; font-size: 1rem; }
+        .highlight .cta-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; }
+
+.plan-comparison { margin-top: 3rem; display: none; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; box-shadow: var(--box-shadow); border-radius: var(--border-radius); overflow: hidden; }
+        .comparison-table th { background-color: var(--primary); color: white; padding: 1rem; text-align: left; }
+        .comparison-table td { padding: 1rem; border-bottom: 1px solid #ddd; }
+        .comparison-table tr:nth-child(even) { background-color: #f8f9fa; }
+        .comparison-table tr:hover { background-color: #e9ecef; }
+
+.plan-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; font-size: 0.8rem; }
+        .plan-a { background-color: #e3f2fd; color: #1565c0; }
+        .plan-b { background-color: #e8f5e9; color: #2e7d32; }
+        .plan-c { background-color: #fff3e0; color: #ef6c00; }
+
+.features { padding: 4rem 0; background-color: var(--light); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .feature-card { background-color: white; padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); text-align: center; transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-icon { font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem; }
+        .feature-card h3 { margin-bottom: 1rem; color: var(--primary); }
+
+footer { background-color: var(--primary); color: white; padding: 3rem 0 1.5rem; }
+        .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; margin-bottom: 1.5rem; }
+        .footer-column h3 { margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 0.8rem; }
+        .footer-column ul li a { color: #ddd; text-decoration: none; transition: color 0.3s; }
+        .footer-column ul li a:hover { color: white; }
+        .copyright { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); color: #ddd; font-size: 0.9rem; }
+
+.plan-comparison-results { margin-top: 2rem; border-top: 1px solid #ddd; padding-top: 1.5rem; }
+        .plan-comparison-results h4 { margin-bottom: 1rem; color: var(--primary); text-align: center; }
+        .comparison-table-small { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+        .comparison-table-small th { background-color: var(--secondary); color: white; padding: 0.8rem; text-align: center; }
+        .comparison-table-small td { padding: 0.8rem; border: 1px solid #ddd; text-align: center; }
+        .comparison-table-small tr:nth-child(even) { background-color: #f8f9fa; }
+
+.recommended-plan { background-color: #fff8e1; border-left: 4px solid #ffc107; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; }
+        .recommended-badge { display: inline-block; background-color: #ffc107; color: #333; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; font-size: 0.8rem; margin-bottom: 0.5rem; }
+
+.loading { display: none; text-align: center; padding: 1rem; }
+        .loading-spinner { border: 4px solid rgba(0,0,0,0.1); border-left-color: var(--accent); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+.error-message { background-color: #f8d7da; color: #721c24; padding: 0.75rem; border-radius: var(--border-radius); margin-bottom: 1rem; display: none; }
+        .success-message { background-color: #d4edda; color: #155724; padding: 0.75rem; border-radius: var(--border-radius); margin-bottom: 1rem; display: none; }
+
+.disclaimer { background-color: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 1rem; border-radius: var(--border-radius); margin: 1.5rem 0; font-size: 0.9rem; text-align: center; display: none; }
+        .disclaimer strong { display: block; margin-bottom: 0.5rem; }
+
+.cta-section { text-align: center; padding: 2rem; margin: 2rem auto; max-width: 800px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .cta-section h3 { margin-bottom: 1rem; font-size: 1.5rem; }
+        .cta-section p { margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .cta-section .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; }
+            nav ul { margin-top: 1rem; flex-wrap: wrap; justify-content: center; }
+            nav ul li { margin: 0.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .comparison-table { display: block; overflow-x: auto; }
+            .calculator-container { flex-direction: column; }
+            .cta-section { padding: 1.5rem; }
+            .cta-section h3 { font-size: 1.3rem; }
+            .cta-section p { font-size: 1rem; }
+        }
+        html { scroll-behavior: smooth; }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="container header-content">
+
+<div>
+
+<div class="logo">Klik<span>Takaful</span></div>
+
+<div class="tagline">Takaful untuk anda dengan hanya satu klik</div>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="#home">Utama</a></li>
+
+<li><a href="#calculator">Kalkulator</a></li>
+
+<li><a href="#features">Ciri-ciri</a></li>
+
+<li><a href="#contact">Hubungi</a></li>
+
+</ul>
+
+</nav>
+
+</div>
+
+</header>
+
+<section class="hero" id="home">
+
+<div class="container">
+
+<h1>Perancangan Takaful Anda Dengan Profesional</h1>
+
+<p>Lindungi kesihatan dan kewangan anda dengan penyelesaian Takaful. Kira sumbangan anda dan dapatkan nasihat perlindungan kewangan.</p>
+
+<a href="#calculator" class="btn">Kira Sumbangan Anda</a>
+
+</div>
+
+</section>
+
+<section class="calculator-section" id="calculator">
+
+<div class="container">
+
+<h2 class="section-title">Kalkulator Sumbangan Takaful</h2>
+
+<div class="error-message" id="error-message"></div>
+        <div class="success-message" id="success-message"></div>
+
+<div class="calculator-container">
+
+<div class="calculator-form">
+
+<h3>Masukkan Butiran Anda</h3>
+
+<div class="form-group">
+
+<label for="product">Jenis Produk</label>
+
+<select id="product">
+
+<option value="">Pilih Jenis Produk</option>
+
+<option value="Medical Card">Medical Card</option>
+
+<option value="Hibah Takaful">Hibah Takaful</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label for="gender">Pilih Jantina</label>
+
+<select id="gender">
+
+<option value="">Pilih Jantina</option>
+
+<option value="Lelaki">Lelaki</option>
+
+<option value="Perempuan">Perempuan</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label for="age">Pilih Umur</label>
+
+<select id="age">
+
+<option value="">Pilih Umur</option>
+
+</select>
+
+</div>
+
+<div class="form-group" id="sum-covered-group" style="display: none;">
+
+<label for="sum-covered">Pilih Jumlah Perlindungan</label>
+
+<select id="sum-covered">
+
+<option value="">Pilih Jumlah Perlindungan</option>
+
+<option value="250000">RM250,000</option>
+
+<option value="350000">RM350,000</option>
+
+<option value="1000000">RM1,000,000</option>
+
+</select>
+
+</div>
+
+<button id="calculate-btn" class="btn">Kira Sumbangan</button>
+
+<div class="loading" id="loading">
+
+<div class="loading-spinner"></div>
+
+<p>Mengira sumbangan anda...</p>
+
+</div>
+
+</div>
+
+<div class="calculator-results">
+
+<h3>Pelan Takaful Cadangan</h3>
+
+<div class="recommended-plan">
+
+<span class="recommended-badge">Pelan Pilihan</span>
+
+<div class="result-item">
+
+<div class="result-label">Jenis Pelan</div>
+
+<div class="result-value" id="product-type">-</div>
+
+</div>
+
+<div class="result-item">
+
+<div class="result-label">Sumbangan Bulanan</div>
+
+<div class="result-value" id="annual-premium">-</div>
+
+</div>
+
+<div class="result-item">
+
+<div class="result-label" id="coverage-label">Had Tahunan</div>
+
+<div class="result-value" id="coverage-amount">-</div>
+
+</div>
+
+</div>
+
+<div class="plan-comparison-results" id="plan-comparison-results">
+
+<h4>Perbandingan Pelan Takaful</h4>
+
+<table class="comparison-table-small">
+
+<thead>
+
+<tr>
+
+<th>Pelan</th>
+
+<th>Sumbangan Bulanan</th>
+
+<th id="comparison-header">Had Tahunan</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td><span class="plan-badge plan-a">Pelan A</span></td>
+
+<td id="plan-a-price"></td>
+
+<td id="plan-a-coverage"></td>
+
+</tr>
+
+<tr>
+
+<td><span class="plan-badge plan-b">Pelan B</span></td>
+
+<td id="plan-b-price"></td>
+
+<td id="plan-b-coverage"></td>
+
+</tr>
+
+<tr>
+
+<td><span class="plan-badge plan-c">Pelan C</span></td>
+
+<td id="plan-c-price"></td>
+
+<td id="plan-c-coverage"></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="disclaimer" id="results-disclaimer">
+
+<strong>PENTING:</strong> Harga sumbangan mungkin berbeza berdasarkan gaya hidup anda (status merokok, jenis pekerjaan dan sejarah penyakit). Untuk quotation terperinci, sila hubungi perunding kami.
+
+</div>
+
+<div class="highlight" id="result-cta-box">
+
+<p id="result-cta-text">Dapatkan konsultasi terperinci dengan pakar kewangan kami</p>
+
+<div class="cta-buttons">
+
+<button class="btn btn-hibah" id="result-cta-btn" onclick="handleResultCTA()">
+
+Dapatkan Quotation Sebenar →
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Plan Comparison Table -->
+        <div class="plan-comparison" id="plan-comparison">
+
+<h3 class="section-title">Perbandingan Pelan Takaful</h3>
+
+<table class="comparison-table">
+
+<thead>
+
+<tr>
+
+<th>Ciri-ciri</th>
+
+<th>Pelan A</th>
+
+<th>Pelan B</th>
+
+<th>Pelan C</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr id="coverage-row">
+
+<td id="coverage-header">Had Tahunan</td>
+
+<td id="plan-a-coverage-main">RM180,000</td>
+
+<td id="plan-b-coverage-main">RM1,000,000</td>
+
+<td id="plan-c-coverage-main">RM1,500,000</td>
+
+</tr>
+
+<tr id="kelebihan-row">
+
+<td>Kelebihan</td>
+
+<td id="plan-a-kelebihan">Perlindungan asas dengan bayaran bulanan paling rendah</td>
+
+<td id="plan-b-kelebihan">Perlindungan lebih tinggi dengan manfaat komprehensif</td>
+
+<td id="plan-c-kelebihan">Perlindungan maksimum dengan sumbangan bulanan paling berbaloi</td>
+
+</tr>
+
+<tr id="sesuai-row">
+
+<td>Sesuai Untuk</td>
+
+<td>Individu muda atau yang baru mula bekerja dan nak perlindungan bajet</td>
+
+<td>Individu yang memerlukan perlindungan menyeluruh</td>
+
+<td>Individu yang mengutamakan perlindungan maksimum</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="cta-section" id="comparison-cta">
+
+<h3 id="comparison-cta-title">Dapatkan Quotation Sebenar</h3>
+
+<p id="comparison-cta-text">Bincangkan keperluan Takaful anda dengan pakar kewangan kami.</p>
+
+<div class="cta-buttons">
+
+<button class="btn btn-hibah" id="comparison-cta-btn" onclick="handleComparisonCTA()">
+
+Teruskan ke Quotation →
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="features" id="features">
+
+<div class="container">
+
+<h2 class="section-title">Mengapa Pilih Penyelesaian Takaful Kami</h2>
+
+<div class="features-grid">
+
+<div class="feature-card">
+
+<div class="feature-icon">🕌</div>
+
+<h3>Patuh Syariah</h3>
+
+<p>Semua produk kami dibawah Akta Perkhidmatan Kewangan Islam 2013 dan dikawalselia oleh Bank Negara Malaysia.</p>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon">🛡️</div>
+
+<h3>Perlindungan Menyeluruh</h3>
+
+<p>Dapatkan perlindungan kewangan lengkap untuk anda dan keluarga dengan pilihan pembayaran fleksibel dari 9 Syarikat Takaful di Malaysia.</p>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon">💰</div>
+
+<h3>Harga Berpatutan</h3>
+
+<p>Sumbangan berpatutan dengan manfaat maksimum disesuaikan dengan keperluan kewangan anda.</p>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon">👥</div>
+
+<h3>Konsultasi Pakar</h3>
+
+<p>Perunding kewangan bertauliah kami memberikan nasihat peribadi untuk situasi unik anda.</p>
+
+</div>
+
+</div>
+
+<div class="cta-section">
+
+<h3>Bincang Terus Dengan Pakar Kami</h3>
+
+<p>Perunding kewangan bertauliah kami sedia membantu anda memilih pelan yang paling sesuai dengan bajet dan keperluan anda.</p>
+
+<div class="cta-buttons">
+
+<a href="https://wa.me/60132124592?text=Salam%2C%20saya%20nak%20tanya%20tentang%20pelan%20Takaful" class="btn btn-wa" target="_blank">
+
+💬 WhatsApp Kami Sekarang
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer id="contact">
+
+<div class="container">
+
+<div class="footer-content">
+
+<div class="footer-column">
+
+<h3>KlikTakaful</h3>
+
+<p>Memberi penyelesaian kewangan patuh Syariah selama lebih 10 tahun.</p>
+
+</div>
+
+<div class="footer-column">
+
+<h3>Pautan Pantas</h3>
+
+<ul>
+
+<li><a href="#home">Utama</a></li>
+
+<li><a href="#calculator">Kalkulator</a></li>
+
+<li><a href="#features">Ciri-ciri</a></li>
+
+<li><a href="#contact">Hubungi</a></li>
+
+</ul>
+
+</div>
+
+<div class="footer-column">
+
+<h3>Hubungi Kami</h3>
+
+<ul>
+
+<li>📞 +6013 212 4592</li>
+
+<li>✉️ info@kliktakaful.com</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="copyright">© 2025 KlikTakaful. Hak cipta terpelihara.</div>
+
+</div>
+
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        populateAgeDropdown('Medical Card');
+    });
+
+    // ============================================================
+    // REDIRECT LOGIC
+    // Hibah Takaful  → HibahTakaful-Dil landing page
+    // Medical Card   → WhatsApp terus
+    // ============================================================
+
+    const DILTAKAFUL_URL = 'hibah.html';
+    const WHATSAPP_URL   = 'https://wa.me/60132124592';
+
+    let currentProduct = '';
+    let currentResult  = { hibah: '', umur: '', gender: '', caruman: '' };
+
+    function getHibahCode(sumCovered) {
+        const map = { 250000: '250k', 350000: '350k', 1000000: '1m' };
+        return map[sumCovered] || '250k';
+    }
+
+    function buildDilTakafulURL(result) {
+        const url = new URL(DILTAKAFUL_URL);
+        url.searchParams.set('hibah',   result.hibah);
+        url.searchParams.set('umur',    result.umur);      // ← umur sebenar (nombor)
+        url.searchParams.set('gender',  result.gender);
+        url.searchParams.set('caruman', result.caruman);
+        return url.toString();
+    }
+
+    function buildWhatsAppURL(product, gender, age, premium) {
+        const msg = `Salam%2C%20saya%20nak%20tanya%20tentang%20*${encodeURIComponent(product)}*%0AJantina%3A%20${gender}%0AUmur%3A%20${age}%20tahun%0ASumbangan%20anggaran%3A%20${encodeURIComponent(premium)}`;
+        return `${WHATSAPP_URL}?text=${msg}`;
+    }
+
+    function handleResultCTA() {
+        if (currentProduct === 'Hibah Takaful') {
+            window.location.href = buildDilTakafulURL(currentResult);
+        } else {
+            window.open(buildWhatsAppURL(
+                currentProduct,
+                document.getElementById('gender').value,
+                document.getElementById('age').value,
+                document.getElementById('annual-premium').textContent
+            ), '_blank');
+        }
+    }
+
+    function handleComparisonCTA() {
+        handleResultCTA();
+    }
+
+    function updateCTAButtons(product) {
+        const isHibah = product === 'Hibah Takaful';
+
+        const resultBtn  = document.getElementById('result-cta-btn');
+        const resultText = document.getElementById('result-cta-text');
+        if (isHibah) {
+            resultBtn.textContent  = '📋 Dapatkan Quotation Sebenar →';
+            resultBtn.className    = 'btn btn-hibah';
+            resultText.textContent = 'Nak tahu harga tepat dari 9 syarikat Takaful serentak?';
+        } else {
+            resultBtn.textContent  = '💬 Hubungi Kami via WhatsApp';
+            resultBtn.className    = 'btn btn-wa';
+            resultText.textContent = 'Dapatkan konsultasi peribadi dengan pakar Medical Card kami.';
+        }
+
+        const compTitle = document.getElementById('comparison-cta-title');
+        const compText  = document.getElementById('comparison-cta-text');
+        const compBtn   = document.getElementById('comparison-cta-btn');
+        if (isHibah) {
+            compTitle.textContent = 'Teruskan ke Quotation Sebenar';
+            compText.textContent  = 'Bincangkan keperluan Hibah Takaful anda. Penasihat bebas kami akan bandingkan harga dari 9 syarikat serentak — percuma, tanpa obligasi.';
+            compBtn.textContent   = '📋 Dapatkan Quotation Hibah Takaful →';
+            compBtn.className     = 'btn btn-hibah';
+        } else {
+            compTitle.textContent = 'Bincang Terus Dengan Pakar Medical Card';
+            compText.textContent  = 'Setiap kes Medical Card adalah unik. Hubungi kami untuk semakan kelayakan dan quotation yang lebih tepat mengikut kesihatan anda.';
+            compBtn.textContent   = '💬 Hubungi Pakar via WhatsApp';
+            compBtn.className     = 'btn btn-wa';
+        }
+    }
+
+    // ============================================================
+    // DATABASE
+    // ============================================================
+
+    const medicalCardDB = [
+       { Plan: "A", Gender: "Lelaki", Age: 1, SumCovered: 180000, Price: 239 },
+    { Plan: "B", Gender: "Lelaki", Age: 1, SumCovered: 1000000, Price: 270 },
+    { Plan: "C", Gender: "Lelaki", Age: 1, SumCovered: 1500000, Price: 290 },
+    { Plan: "A", Gender: "Perempuan", Age: 1, SumCovered: 180000, Price: 240 },
+    { Plan: "B", Gender: "Perempuan", Age: 1, SumCovered: 1000000, Price: 260 },
+    { Plan: "C", Gender: "Perempuan", Age: 1, SumCovered: 1500000, Price: 284 },
+    { Plan: "A", Gender: "Lelaki", Age: 2, SumCovered: 180000, Price: 239 },
+    { Plan: "B", Gender: "Lelaki", Age: 2, SumCovered: 1000000, Price: 240 },
+    { Plan: "C", Gender: "Lelaki", Age: 2, SumCovered: 1500000, Price: 288 },
+    { Plan: "A", Gender: "Perempuan", Age: 2, SumCovered: 180000, Price: 240 },
+    { Plan: "B", Gender: "Perempuan", Age: 2, SumCovered: 1000000, Price: 250 },
+    { Plan: "C", Gender: "Perempuan", Age: 2, SumCovered: 1500000, Price: 284 },
+    { Plan: "A", Gender: "Lelaki", Age: 3, SumCovered: 180000, Price: 172 },
+    { Plan: "B", Gender: "Lelaki", Age: 3, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Lelaki", Age: 3, SumCovered: 1500000, Price: 281 },
+    { Plan: "A", Gender: "Perempuan", Age: 3, SumCovered: 180000, Price: 173 },
+    { Plan: "B", Gender: "Perempuan", Age: 3, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Perempuan", Age: 3, SumCovered: 1500000, Price: 279 },
+    { Plan: "A", Gender: "Lelaki", Age: 4, SumCovered: 180000, Price: 172 },
+    { Plan: "B", Gender: "Lelaki", Age: 4, SumCovered: 1000000, Price: 200 },
+    { Plan: "C", Gender: "Lelaki", Age: 4, SumCovered: 1500000, Price: 278 },
+    { Plan: "A", Gender: "Perempuan", Age: 4, SumCovered: 180000, Price: 173 },
+    { Plan: "B", Gender: "Perempuan", Age: 4, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Perempuan", Age: 4, SumCovered: 1500000, Price: 278 },
+    { Plan: "A", Gender: "Lelaki", Age: 5, SumCovered: 180000, Price: 172 },
+    { Plan: "B", Gender: "Lelaki", Age: 5, SumCovered: 1000000, Price: 200 },
+    { Plan: "C", Gender: "Lelaki", Age: 5, SumCovered: 1500000, Price: 279 },
+    { Plan: "A", Gender: "Perempuan", Age: 5, SumCovered: 180000, Price: 173 },
+    { Plan: "B", Gender: "Perempuan", Age: 5, SumCovered: 1000000, Price: 200 },
+    { Plan: "C", Gender: "Perempuan", Age: 5, SumCovered: 1500000, Price: 279 },
+    { Plan: "A", Gender: "Lelaki", Age: 6, SumCovered: 180000, Price: 153 },
+    { Plan: "B", Gender: "Lelaki", Age: 6, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 6, SumCovered: 1500000, Price: 163 },
+    { Plan: "A", Gender: "Perempuan", Age: 6, SumCovered: 180000, Price: 154 },
+    { Plan: "B", Gender: "Perempuan", Age: 6, SumCovered: 1000000, Price: 151 },
+    { Plan: "C", Gender: "Perempuan", Age: 6, SumCovered: 1500000, Price: 152 },
+    { Plan: "A", Gender: "Lelaki", Age: 7, SumCovered: 180000, Price: 144 },
+    { Plan: "B", Gender: "Lelaki", Age: 7, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 7, SumCovered: 1500000, Price: 162 },
+    { Plan: "A", Gender: "Perempuan", Age: 7, SumCovered: 180000, Price: 153 },
+    { Plan: "B", Gender: "Perempuan", Age: 7, SumCovered: 1000000, Price: 151 },
+    { Plan: "C", Gender: "Perempuan", Age: 7, SumCovered: 1500000, Price: 151 },
+    { Plan: "A", Gender: "Lelaki", Age: 8, SumCovered: 180000, Price: 141 },
+    { Plan: "B", Gender: "Lelaki", Age: 8, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 8, SumCovered: 1500000, Price: 161 },
+    { Plan: "A", Gender: "Perempuan", Age: 8, SumCovered: 180000, Price: 136 },
+    { Plan: "B", Gender: "Perempuan", Age: 8, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 8, SumCovered: 1500000, Price: 150 },
+    { Plan: "A", Gender: "Lelaki", Age: 9, SumCovered: 180000, Price: 120 },
+    { Plan: "B", Gender: "Lelaki", Age: 9, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 9, SumCovered: 1500000, Price: 161 },
+    { Plan: "A", Gender: "Perempuan", Age: 9, SumCovered: 180000, Price: 123 },
+    { Plan: "B", Gender: "Perempuan", Age: 9, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 9, SumCovered: 1500000, Price: 150 },
+    { Plan: "A", Gender: "Lelaki", Age: 10, SumCovered: 180000, Price: 106 },
+    { Plan: "B", Gender: "Lelaki", Age: 10, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 10, SumCovered: 1500000, Price: 160 },
+    { Plan: "A", Gender: "Perempuan", Age: 10, SumCovered: 180000, Price: 110 },
+    { Plan: "B", Gender: "Perempuan", Age: 10, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 10, SumCovered: 1500000, Price: 148 },
+    { Plan: "A", Gender: "Lelaki", Age: 11, SumCovered: 180000, Price: 94 },
+    { Plan: "B", Gender: "Lelaki", Age: 11, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Lelaki", Age: 11, SumCovered: 1500000, Price: 154 },
+    { Plan: "A", Gender: "Perempuan", Age: 11, SumCovered: 180000, Price: 102 },
+    { Plan: "B", Gender: "Perempuan", Age: 11, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Perempuan", Age: 11, SumCovered: 1500000, Price: 143 },
+    { Plan: "A", Gender: "Lelaki", Age: 12, SumCovered: 180000, Price: 90 },
+    { Plan: "B", Gender: "Lelaki", Age: 12, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Lelaki", Age: 12, SumCovered: 1500000, Price: 153 },
+    { Plan: "A", Gender: "Perempuan", Age: 12, SumCovered: 180000, Price: 99 },
+    { Plan: "B", Gender: "Perempuan", Age: 12, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Perempuan", Age: 12, SumCovered: 1500000, Price: 142 },
+    { Plan: "A", Gender: "Lelaki", Age: 13, SumCovered: 180000, Price: 88 },
+    { Plan: "B", Gender: "Lelaki", Age: 13, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Lelaki", Age: 13, SumCovered: 1500000, Price: 152 },
+    { Plan: "A", Gender: "Perempuan", Age: 13, SumCovered: 180000, Price: 94 },
+    { Plan: "B", Gender: "Perempuan", Age: 13, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Perempuan", Age: 13, SumCovered: 1500000, Price: 140 },
+    { Plan: "A", Gender: "Lelaki", Age: 14, SumCovered: 180000, Price: 86 },
+    { Plan: "B", Gender: "Lelaki", Age: 14, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Lelaki", Age: 14, SumCovered: 1500000, Price: 151 },
+    { Plan: "A", Gender: "Perempuan", Age: 14, SumCovered: 180000, Price: 89 },
+    { Plan: "B", Gender: "Perempuan", Age: 14, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Perempuan", Age: 14, SumCovered: 1500000, Price: 140 },
+    { Plan: "A", Gender: "Lelaki", Age: 15, SumCovered: 180000, Price: 85 },
+    { Plan: "B", Gender: "Lelaki", Age: 15, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Lelaki", Age: 15, SumCovered: 1500000, Price: 150 },
+    { Plan: "A", Gender: "Perempuan", Age: 15, SumCovered: 180000, Price: 85 },
+    { Plan: "B", Gender: "Perempuan", Age: 15, SumCovered: 1000000, Price: 140 },
+    { Plan: "C", Gender: "Perempuan", Age: 15, SumCovered: 1500000, Price: 139 },
+    { Plan: "A", Gender: "Lelaki", Age: 16, SumCovered: 180000, Price: 91 },
+    { Plan: "B", Gender: "Lelaki", Age: 16, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 16, SumCovered: 1500000, Price: 157 },
+    { Plan: "A", Gender: "Perempuan", Age: 16, SumCovered: 180000, Price: 89 },
+    { Plan: "B", Gender: "Perempuan", Age: 16, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 16, SumCovered: 1500000, Price: 146 },
+    { Plan: "A", Gender: "Lelaki", Age: 17, SumCovered: 180000, Price: 92 },
+    { Plan: "B", Gender: "Lelaki", Age: 17, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Lelaki", Age: 17, SumCovered: 1500000, Price: 156 },
+    { Plan: "A", Gender: "Perempuan", Age: 17, SumCovered: 180000, Price: 91 },
+    { Plan: "B", Gender: "Perempuan", Age: 17, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 17, SumCovered: 1500000, Price: 145 },
+    { Plan: "A", Gender: "Lelaki", Age: 18, SumCovered: 180000, Price: 92 },
+    { Plan: "B", Gender: "Lelaki", Age: 18, SumCovered: 1000000, Price: 160 },
+    { Plan: "C", Gender: "Lelaki", Age: 18, SumCovered: 1500000, Price: 155 },
+    { Plan: "A", Gender: "Perempuan", Age: 18, SumCovered: 180000, Price: 92 },
+    { Plan: "B", Gender: "Perempuan", Age: 18, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 18, SumCovered: 1500000, Price: 140 },
+    { Plan: "A", Gender: "Lelaki", Age: 19, SumCovered: 180000, Price: 92 },
+    { Plan: "B", Gender: "Lelaki", Age: 19, SumCovered: 1000000, Price: 160 },
+    { Plan: "C", Gender: "Lelaki", Age: 19, SumCovered: 1500000, Price: 149 },
+    { Plan: "A", Gender: "Perempuan", Age: 19, SumCovered: 180000, Price: 93 },
+    { Plan: "B", Gender: "Perempuan", Age: 19, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 19, SumCovered: 1500000, Price: 139 },
+    { Plan: "A", Gender: "Lelaki", Age: 20, SumCovered: 180000, Price: 94 },
+    { Plan: "B", Gender: "Lelaki", Age: 20, SumCovered: 1000000, Price: 160 },
+    { Plan: "C", Gender: "Lelaki", Age: 20, SumCovered: 1500000, Price: 149 },
+    { Plan: "A", Gender: "Perempuan", Age: 20, SumCovered: 180000, Price: 94 },
+    { Plan: "B", Gender: "Perempuan", Age: 20, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 20, SumCovered: 1500000, Price: 139 },
+    { Plan: "A", Gender: "Lelaki", Age: 21, SumCovered: 180000, Price: 101 },
+    { Plan: "B", Gender: "Lelaki", Age: 21, SumCovered: 1000000, Price: 170 },
+    { Plan: "C", Gender: "Lelaki", Age: 21, SumCovered: 1500000, Price: 154 },
+    { Plan: "A", Gender: "Perempuan", Age: 21, SumCovered: 180000, Price: 96 },
+    { Plan: "B", Gender: "Perempuan", Age: 21, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 21, SumCovered: 1500000, Price: 142 },
+    { Plan: "A", Gender: "Lelaki", Age: 22, SumCovered: 180000, Price: 102 },
+    { Plan: "B", Gender: "Lelaki", Age: 22, SumCovered: 1000000, Price: 170 },
+    { Plan: "C", Gender: "Lelaki", Age: 22, SumCovered: 1500000, Price: 154 },
+    { Plan: "A", Gender: "Perempuan", Age: 22, SumCovered: 180000, Price: 98 },
+    { Plan: "B", Gender: "Perempuan", Age: 22, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 22, SumCovered: 1500000, Price: 143 },
+    { Plan: "A", Gender: "Lelaki", Age: 23, SumCovered: 180000, Price: 103 },
+    { Plan: "B", Gender: "Lelaki", Age: 23, SumCovered: 1000000, Price: 170 },
+    { Plan: "C", Gender: "Lelaki", Age: 23, SumCovered: 1500000, Price: 155 },
+    { Plan: "A", Gender: "Perempuan", Age: 23, SumCovered: 180000, Price: 99 },
+    { Plan: "B", Gender: "Perempuan", Age: 23, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 23, SumCovered: 1500000, Price: 143 },
+    { Plan: "A", Gender: "Lelaki", Age: 24, SumCovered: 180000, Price: 103 },
+    { Plan: "B", Gender: "Lelaki", Age: 24, SumCovered: 1000000, Price: 180 },
+    { Plan: "C", Gender: "Lelaki", Age: 24, SumCovered: 1500000, Price: 155 },
+    { Plan: "A", Gender: "Perempuan", Age: 24, SumCovered: 180000, Price: 99 },
+    { Plan: "B", Gender: "Perempuan", Age: 24, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 24, SumCovered: 1500000, Price: 144 },
+    { Plan: "A", Gender: "Lelaki", Age: 25, SumCovered: 180000, Price: 104 },
+    { Plan: "B", Gender: "Lelaki", Age: 25, SumCovered: 1000000, Price: 180 },
+    { Plan: "C", Gender: "Lelaki", Age: 25, SumCovered: 1500000, Price: 156 },
+    { Plan: "A", Gender: "Perempuan", Age: 25, SumCovered: 180000, Price: 100 },
+    { Plan: "B", Gender: "Perempuan", Age: 25, SumCovered: 1000000, Price: 150 },
+    { Plan: "C", Gender: "Perempuan", Age: 25, SumCovered: 1500000, Price: 144 },
+    { Plan: "A", Gender: "Lelaki", Age: 26, SumCovered: 180000, Price: 109 },
+    { Plan: "B", Gender: "Lelaki", Age: 26, SumCovered: 1000000, Price: 190 },
+    { Plan: "C", Gender: "Lelaki", Age: 26, SumCovered: 1500000, Price: 171 },
+    { Plan: "A", Gender: "Perempuan", Age: 26, SumCovered: 180000, Price: 101 },
+    { Plan: "B", Gender: "Perempuan", Age: 26, SumCovered: 1000000, Price: 160 },
+    { Plan: "C", Gender: "Perempuan", Age: 26, SumCovered: 1500000, Price: 159 },
+    { Plan: "A", Gender: "Lelaki", Age: 27, SumCovered: 180000, Price: 109 },
+    { Plan: "B", Gender: "Lelaki", Age: 27, SumCovered: 1000000, Price: 190 },
+    { Plan: "C", Gender: "Lelaki", Age: 27, SumCovered: 1500000, Price: 171 },
+    { Plan: "A", Gender: "Perempuan", Age: 27, SumCovered: 180000, Price: 102 },
+    { Plan: "B", Gender: "Perempuan", Age: 27, SumCovered: 1000000, Price: 160 },
+    { Plan: "C", Gender: "Perempuan", Age: 27, SumCovered: 1500000, Price: 160 },
+    { Plan: "A", Gender: "Lelaki", Age: 28, SumCovered: 180000, Price: 109 },
+    { Plan: "B", Gender: "Lelaki", Age: 28, SumCovered: 1000000, Price: 200 },
+    { Plan: "C", Gender: "Lelaki", Age: 28, SumCovered: 1500000, Price: 172 },
+    { Plan: "A", Gender: "Perempuan", Age: 28, SumCovered: 180000, Price: 103 },
+    { Plan: "B", Gender: "Perempuan", Age: 28, SumCovered: 1000000, Price: 160 },
+    { Plan: "C", Gender: "Perempuan", Age: 28, SumCovered: 1500000, Price: 160 },
+    { Plan: "A", Gender: "Lelaki", Age: 29, SumCovered: 180000, Price: 110 },
+    { Plan: "B", Gender: "Lelaki", Age: 29, SumCovered: 1000000, Price: 200 },
+    { Plan: "C", Gender: "Lelaki", Age: 29, SumCovered: 1500000, Price: 172 },
+    { Plan: "A", Gender: "Perempuan", Age: 29, SumCovered: 180000, Price: 104 },
+    { Plan: "B", Gender: "Perempuan", Age: 29, SumCovered: 1000000, Price: 170 },
+    { Plan: "C", Gender: "Perempuan", Age: 29, SumCovered: 1500000, Price: 161 },
+    { Plan: "A", Gender: "Lelaki", Age: 30, SumCovered: 180000, Price: 112 },
+    { Plan: "B", Gender: "Lelaki", Age: 30, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Lelaki", Age: 30, SumCovered: 1500000, Price: 173 },
+    { Plan: "A", Gender: "Perempuan", Age: 30, SumCovered: 180000, Price: 105 },
+    { Plan: "B", Gender: "Perempuan", Age: 30, SumCovered: 1000000, Price: 170 },
+    { Plan: "C", Gender: "Perempuan", Age: 30, SumCovered: 1500000, Price: 161 },
+    { Plan: "A", Gender: "Lelaki", Age: 31, SumCovered: 180000, Price: 117 },
+    { Plan: "B", Gender: "Lelaki", Age: 31, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Lelaki", Age: 31, SumCovered: 1500000, Price: 184 },
+    { Plan: "A", Gender: "Perempuan", Age: 31, SumCovered: 180000, Price: 115 },
+    { Plan: "B", Gender: "Perempuan", Age: 31, SumCovered: 1000000, Price: 170 },
+    { Plan: "C", Gender: "Perempuan", Age: 31, SumCovered: 1500000, Price: 183 },
+    { Plan: "A", Gender: "Lelaki", Age: 32, SumCovered: 180000, Price: 119 },
+    { Plan: "B", Gender: "Lelaki", Age: 32, SumCovered: 1000000, Price: 220 },
+    { Plan: "C", Gender: "Lelaki", Age: 32, SumCovered: 1500000, Price: 185 },
+    { Plan: "A", Gender: "Perempuan", Age: 32, SumCovered: 180000, Price: 117 },
+    { Plan: "B", Gender: "Perempuan", Age: 32, SumCovered: 1000000, Price: 180 },
+    { Plan: "C", Gender: "Perempuan", Age: 32, SumCovered: 1500000, Price: 184 },
+    { Plan: "A", Gender: "Lelaki", Age: 33, SumCovered: 180000, Price: 120 },
+    { Plan: "B", Gender: "Lelaki", Age: 33, SumCovered: 1000000, Price: 220 },
+    { Plan: "C", Gender: "Lelaki", Age: 33, SumCovered: 1500000, Price: 185 },
+    { Plan: "A", Gender: "Perempuan", Age: 33, SumCovered: 180000, Price: 120 },
+    { Plan: "B", Gender: "Perempuan", Age: 33, SumCovered: 1000000, Price: 180 },
+    { Plan: "C", Gender: "Perempuan", Age: 33, SumCovered: 1500000, Price: 185 },
+    { Plan: "A", Gender: "Lelaki", Age: 34, SumCovered: 180000, Price: 123 },
+    { Plan: "B", Gender: "Lelaki", Age: 34, SumCovered: 1000000, Price: 230 },
+    { Plan: "C", Gender: "Lelaki", Age: 34, SumCovered: 1500000, Price: 186 },
+    { Plan: "A", Gender: "Perempuan", Age: 34, SumCovered: 180000, Price: 122 },
+    { Plan: "B", Gender: "Perempuan", Age: 34, SumCovered: 1000000, Price: 190 },
+    { Plan: "C", Gender: "Perempuan", Age: 34, SumCovered: 1500000, Price: 187 },
+    { Plan: "A", Gender: "Lelaki", Age: 35, SumCovered: 180000, Price: 125 },
+    { Plan: "B", Gender: "Lelaki", Age: 35, SumCovered: 1000000, Price: 240 },
+    { Plan: "C", Gender: "Lelaki", Age: 35, SumCovered: 1500000, Price: 187 },
+    { Plan: "A", Gender: "Perempuan", Age: 35, SumCovered: 180000, Price: 124 },
+    { Plan: "B", Gender: "Perempuan", Age: 35, SumCovered: 1000000, Price: 190 },
+    { Plan: "C", Gender: "Perempuan", Age: 35, SumCovered: 1500000, Price: 189 },
+    { Plan: "A", Gender: "Lelaki", Age: 36, SumCovered: 180000, Price: 126 },
+    { Plan: "B", Gender: "Lelaki", Age: 36, SumCovered: 1000000, Price: 240 },
+    { Plan: "C", Gender: "Lelaki", Age: 36, SumCovered: 1500000, Price: 217 },
+    { Plan: "A", Gender: "Perempuan", Age: 36, SumCovered: 180000, Price: 125 },
+    { Plan: "B", Gender: "Perempuan", Age: 36, SumCovered: 1000000, Price: 200 },
+    { Plan: "C", Gender: "Perempuan", Age: 36, SumCovered: 1500000, Price: 221 },
+    { Plan: "A", Gender: "Lelaki", Age: 37, SumCovered: 180000, Price: 129 },
+    { Plan: "B", Gender: "Lelaki", Age: 37, SumCovered: 1000000, Price: 250 },
+    { Plan: "C", Gender: "Lelaki", Age: 37, SumCovered: 1500000, Price: 219 },
+    { Plan: "A", Gender: "Perempuan", Age: 37, SumCovered: 180000, Price: 129 },
+    { Plan: "B", Gender: "Perempuan", Age: 37, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Perempuan", Age: 37, SumCovered: 1500000, Price: 225 },
+    { Plan: "A", Gender: "Lelaki", Age: 38, SumCovered: 180000, Price: 130 },
+    { Plan: "B", Gender: "Lelaki", Age: 38, SumCovered: 1000000, Price: 260 },
+    { Plan: "C", Gender: "Lelaki", Age: 38, SumCovered: 1500000, Price: 221 },
+    { Plan: "A", Gender: "Perempuan", Age: 38, SumCovered: 180000, Price: 132 },
+    { Plan: "B", Gender: "Perempuan", Age: 38, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Perempuan", Age: 38, SumCovered: 1500000, Price: 227 },
+    { Plan: "A", Gender: "Lelaki", Age: 39, SumCovered: 180000, Price: 132 },
+    { Plan: "B", Gender: "Lelaki", Age: 39, SumCovered: 1000000, Price: 270 },
+    { Plan: "C", Gender: "Lelaki", Age: 39, SumCovered: 1500000, Price: 223 },
+    { Plan: "A", Gender: "Perempuan", Age: 39, SumCovered: 180000, Price: 136 },
+    { Plan: "B", Gender: "Perempuan", Age: 39, SumCovered: 1000000, Price: 220 },
+    { Plan: "C", Gender: "Perempuan", Age: 39, SumCovered: 1500000, Price: 230 },
+    { Plan: "A", Gender: "Lelaki", Age: 40, SumCovered: 180000, Price: 133 },
+    { Plan: "B", Gender: "Lelaki", Age: 40, SumCovered: 1000000, Price: 280 },
+    { Plan: "C", Gender: "Lelaki", Age: 40, SumCovered: 1500000, Price: 226 },
+    { Plan: "A", Gender: "Perempuan", Age: 40, SumCovered: 180000, Price: 138 },
+    { Plan: "B", Gender: "Perempuan", Age: 40, SumCovered: 1000000, Price: 230 },
+    { Plan: "C", Gender: "Perempuan", Age: 40, SumCovered: 1500000, Price: 232 },
+    { Plan: "A", Gender: "Lelaki", Age: 41, SumCovered: 180000, Price: 143 },
+    { Plan: "B", Gender: "Lelaki", Age: 41, SumCovered: 1000000, Price: 290 },
+    { Plan: "C", Gender: "Lelaki", Age: 41, SumCovered: 1500000, Price: 268 },
+    { Plan: "A", Gender: "Perempuan", Age: 41, SumCovered: 180000, Price: 146 },
+    { Plan: "B", Gender: "Perempuan", Age: 41, SumCovered: 1000000, Price: 230 },
+    { Plan: "C", Gender: "Perempuan", Age: 41, SumCovered: 1500000, Price: 282 },
+    { Plan: "A", Gender: "Lelaki", Age: 42, SumCovered: 180000, Price: 149 },
+    { Plan: "B", Gender: "Lelaki", Age: 42, SumCovered: 1000000, Price: 300 },
+    { Plan: "C", Gender: "Lelaki", Age: 42, SumCovered: 1500000, Price: 271 },
+    { Plan: "A", Gender: "Perempuan", Age: 42, SumCovered: 180000, Price: 149 },
+    { Plan: "B", Gender: "Perempuan", Age: 42, SumCovered: 1000000, Price: 240 },
+    { Plan: "C", Gender: "Perempuan", Age: 42, SumCovered: 1500000, Price: 285 },
+    { Plan: "A", Gender: "Lelaki", Age: 43, SumCovered: 180000, Price: 154 },
+    { Plan: "B", Gender: "Lelaki", Age: 43, SumCovered: 1000000, Price: 310 },
+    { Plan: "C", Gender: "Lelaki", Age: 43, SumCovered: 1500000, Price: 274 },
+    { Plan: "A", Gender: "Perempuan", Age: 43, SumCovered: 180000, Price: 152 },
+    { Plan: "B", Gender: "Perempuan", Age: 43, SumCovered: 1000000, Price: 250 },
+    { Plan: "C", Gender: "Perempuan", Age: 43, SumCovered: 1500000, Price: 290 },
+    { Plan: "A", Gender: "Lelaki", Age: 44, SumCovered: 180000, Price: 161 },
+    { Plan: "B", Gender: "Lelaki", Age: 44, SumCovered: 1000000, Price: 320 },
+    { Plan: "C", Gender: "Lelaki", Age: 44, SumCovered: 1500000, Price: 277 },
+    { Plan: "A", Gender: "Perempuan", Age: 44, SumCovered: 180000, Price: 155 },
+    { Plan: "B", Gender: "Perempuan", Age: 44, SumCovered: 1000000, Price: 260 },
+    { Plan: "C", Gender: "Perempuan", Age: 44, SumCovered: 1500000, Price: 295 },
+    { Plan: "A", Gender: "Lelaki", Age: 45, SumCovered: 180000, Price: 163 },
+    { Plan: "B", Gender: "Lelaki", Age: 45, SumCovered: 1000000, Price: 330 },
+    { Plan: "C", Gender: "Lelaki", Age: 45, SumCovered: 1500000, Price: 281 },
+    { Plan: "A", Gender: "Perempuan", Age: 45, SumCovered: 180000, Price: 173 },
+    { Plan: "B", Gender: "Perempuan", Age: 45, SumCovered: 1000000, Price: 270 },
+    { Plan: "C", Gender: "Perempuan", Age: 45, SumCovered: 1500000, Price: 301 },
+    { Plan: "A", Gender: "Lelaki", Age: 46, SumCovered: 180000, Price: 173 },
+    { Plan: "B", Gender: "Lelaki", Age: 46, SumCovered: 1000000, Price: 350 },
+    { Plan: "C", Gender: "Lelaki", Age: 46, SumCovered: 1500000, Price: 343 },
+    { Plan: "A", Gender: "Perempuan", Age: 46, SumCovered: 180000, Price: 181 },
+    { Plan: "B", Gender: "Perempuan", Age: 46, SumCovered: 1000000, Price: 280 },
+    { Plan: "C", Gender: "Perempuan", Age: 46, SumCovered: 1500000, Price: 369 },
+    { Plan: "A", Gender: "Lelaki", Age: 47, SumCovered: 180000, Price: 179 },
+    { Plan: "B", Gender: "Lelaki", Age: 47, SumCovered: 1000000, Price: 360 },
+    { Plan: "C", Gender: "Lelaki", Age: 47, SumCovered: 1500000, Price: 348 },
+    { Plan: "A", Gender: "Perempuan", Age: 47, SumCovered: 180000, Price: 190 },
+    { Plan: "B", Gender: "Perempuan", Age: 47, SumCovered: 1000000, Price: 290 },
+    { Plan: "C", Gender: "Perempuan", Age: 47, SumCovered: 1500000, Price: 374 },
+    { Plan: "A", Gender: "Lelaki", Age: 48, SumCovered: 180000, Price: 183 },
+    { Plan: "B", Gender: "Lelaki", Age: 48, SumCovered: 1000000, Price: 370 },
+    { Plan: "C", Gender: "Lelaki", Age: 48, SumCovered: 1500000, Price: 353 },
+    { Plan: "A", Gender: "Perempuan", Age: 48, SumCovered: 180000, Price: 199 },
+    { Plan: "B", Gender: "Perempuan", Age: 48, SumCovered: 1000000, Price: 300 },
+    { Plan: "C", Gender: "Perempuan", Age: 48, SumCovered: 1500000, Price: 378 },
+    { Plan: "A", Gender: "Lelaki", Age: 49, SumCovered: 180000, Price: 189 },
+    { Plan: "B", Gender: "Lelaki", Age: 49, SumCovered: 1000000, Price: 430 },
+    { Plan: "C", Gender: "Lelaki", Age: 49, SumCovered: 1500000, Price: 359 },
+    { Plan: "A", Gender: "Perempuan", Age: 49, SumCovered: 180000, Price: 207 },
+    { Plan: "B", Gender: "Perempuan", Age: 49, SumCovered: 1000000, Price: 330 },
+    { Plan: "C", Gender: "Perempuan", Age: 49, SumCovered: 1500000, Price: 381 },
+    { Plan: "A", Gender: "Lelaki", Age: 50, SumCovered: 180000, Price: 194 },
+    { Plan: "B", Gender: "Lelaki", Age: 50, SumCovered: 1000000, Price: 450 },
+    { Plan: "C", Gender: "Lelaki", Age: 50, SumCovered: 1500000, Price: 365 },
+    { Plan: "A", Gender: "Perempuan", Age: 50, SumCovered: 180000, Price: 215 },
+    { Plan: "B", Gender: "Perempuan", Age: 50, SumCovered: 1000000, Price: 340 },
+    { Plan: "C", Gender: "Perempuan", Age: 50, SumCovered: 1500000, Price: 382 },
+    { Plan: "A", Gender: "Lelaki", Age: 51, SumCovered: 180000, Price: 226 },
+    { Plan: "B", Gender: "Lelaki", Age: 51, SumCovered: 1000000, Price: 470 },
+    { Plan: "C", Gender: "Lelaki", Age: 51, SumCovered: 1500000, Price: 443 },
+    { Plan: "A", Gender: "Perempuan", Age: 51, SumCovered: 180000, Price: 223 },
+    { Plan: "B", Gender: "Perempuan", Age: 51, SumCovered: 1000000, Price: 360 },
+    { Plan: "C", Gender: "Perempuan", Age: 51, SumCovered: 1500000, Price: 432 },
+    { Plan: "A", Gender: "Lelaki", Age: 52, SumCovered: 180000, Price: 246 },
+    { Plan: "B", Gender: "Lelaki", Age: 52, SumCovered: 1000000, Price: 490 },
+    { Plan: "C", Gender: "Lelaki", Age: 52, SumCovered: 1500000, Price: 451 },
+    { Plan: "A", Gender: "Perempuan", Age: 52, SumCovered: 180000, Price: 240 },
+    { Plan: "B", Gender: "Perempuan", Age: 52, SumCovered: 1000000, Price: 370 },
+    { Plan: "C", Gender: "Perempuan", Age: 52, SumCovered: 1500000, Price: 432 },
+    { Plan: "A", Gender: "Lelaki", Age: 53, SumCovered: 180000, Price: 257 },
+    { Plan: "B", Gender: "Lelaki", Age: 53, SumCovered: 1000000, Price: 510 },
+    { Plan: "C", Gender: "Lelaki", Age: 53, SumCovered: 1500000, Price: 458 },
+    { Plan: "A", Gender: "Perempuan", Age: 53, SumCovered: 180000, Price: 257 },
+    { Plan: "B", Gender: "Perempuan", Age: 53, SumCovered: 1000000, Price: 390 },
+    { Plan: "C", Gender: "Perempuan", Age: 53, SumCovered: 1500000, Price: 432 },
+    { Plan: "A", Gender: "Lelaki", Age: 54, SumCovered: 180000, Price: 264 },
+    { Plan: "B", Gender: "Lelaki", Age: 54, SumCovered: 1000000, Price: 540 },
+    { Plan: "C", Gender: "Lelaki", Age: 54, SumCovered: 1500000, Price: 464 },
+    { Plan: "A", Gender: "Perempuan", Age: 54, SumCovered: 180000, Price: 268 },
+    { Plan: "B", Gender: "Perempuan", Age: 54, SumCovered: 1000000, Price: 410 },
+    { Plan: "C", Gender: "Perempuan", Age: 54, SumCovered: 1500000, Price: 432 },
+    { Plan: "A", Gender: "Lelaki", Age: 55, SumCovered: 180000, Price: 275 },
+    { Plan: "B", Gender: "Lelaki", Age: 55, SumCovered: 1000000, Price: 560 },
+    { Plan: "C", Gender: "Lelaki", Age: 55, SumCovered: 1500000, Price: 468 },
+    { Plan: "A", Gender: "Perempuan", Age: 55, SumCovered: 180000, Price: 284 },
+    { Plan: "B", Gender: "Perempuan", Age: 55, SumCovered: 1000000, Price: 430 },
+    { Plan: "C", Gender: "Perempuan", Age: 55, SumCovered: 1500000, Price: 430 },
+    { Plan: "A", Gender: "Lelaki", Age: 56, SumCovered: 180000, Price: 297 },
+    { Plan: "B", Gender: "Lelaki", Age: 56, SumCovered: 1000000, Price: 590 },
+    { Plan: "C", Gender: "Lelaki", Age: 56, SumCovered: 1500000, Price: 581 },
+    { Plan: "A", Gender: "Perempuan", Age: 56, SumCovered: 180000, Price: 318 },
+    { Plan: "B", Gender: "Perempuan", Age: 56, SumCovered: 1000000, Price: 450 },
+    { Plan: "C", Gender: "Perempuan", Age: 56, SumCovered: 1500000, Price: 513 },
+    { Plan: "A", Gender: "Lelaki", Age: 57, SumCovered: 180000, Price: 308 },
+    { Plan: "B", Gender: "Lelaki", Age: 57, SumCovered: 1000000, Price: 620 },
+    { Plan: "C", Gender: "Lelaki", Age: 57, SumCovered: 1500000, Price: 583 },
+    { Plan: "A", Gender: "Perempuan", Age: 57, SumCovered: 180000, Price: 324 },
+    { Plan: "B", Gender: "Perempuan", Age: 57, SumCovered: 1000000, Price: 470 },
+    { Plan: "C", Gender: "Perempuan", Age: 57, SumCovered: 1500000, Price: 511 },
+    { Plan: "A", Gender: "Lelaki", Age: 58, SumCovered: 180000, Price: 316 },
+    { Plan: "B", Gender: "Lelaki", Age: 58, SumCovered: 1000000, Price: 640 },
+    { Plan: "C", Gender: "Lelaki", Age: 58, SumCovered: 1500000, Price: 585 },
+    { Plan: "A", Gender: "Perempuan", Age: 58, SumCovered: 180000, Price: 337 },
+    { Plan: "B", Gender: "Perempuan", Age: 58, SumCovered: 1000000, Price: 490 },
+    { Plan: "C", Gender: "Perempuan", Age: 58, SumCovered: 1500000, Price: 511 },
+    { Plan: "A", Gender: "Lelaki", Age: 59, SumCovered: 180000, Price: 344 },
+    { Plan: "B", Gender: "Lelaki", Age: 59, SumCovered: 1000000, Price: 1010 },
+    { Plan: "C", Gender: "Lelaki", Age: 59, SumCovered: 1500000, Price: 591 },
+    { Plan: "A", Gender: "Perempuan", Age: 59, SumCovered: 180000, Price: 364 },
+    { Plan: "B", Gender: "Perempuan", Age: 59, SumCovered: 1000000, Price: 730 },
+    { Plan: "C", Gender: "Perempuan", Age: 59, SumCovered: 1500000, Price: 511 },
+    { Plan: "A", Gender: "Lelaki", Age: 60, SumCovered: 180000, Price: 378 },
+    { Plan: "B", Gender: "Lelaki", Age: 60, SumCovered: 1000000, Price: 1060 },
+    { Plan: "C", Gender: "Lelaki", Age: 60, SumCovered: 1500000, Price: 593 },
+    { Plan: "A", Gender: "Perempuan", Age: 60, SumCovered: 180000, Price: 384 },
+    { Plan: "B", Gender: "Perempuan", Age: 60, SumCovered: 1000000, Price: 770 },
+    { Plan: "C", Gender: "Perempuan", Age: 60, SumCovered: 1500000, Price: 511 },
+    { Plan: "A", Gender: "Lelaki", Age: 61, SumCovered: 180000, Price: 503 },
+    { Plan: "B", Gender: "Lelaki", Age: 61, SumCovered: 1000000, Price: 1120 },
+    { Plan: "C", Gender: "Lelaki", Age: 61, SumCovered: 1500000, Price: 725 },
+    { Plan: "A", Gender: "Perempuan", Age: 61, SumCovered: 180000, Price: 489 },
+    { Plan: "B", Gender: "Perempuan", Age: 61, SumCovered: 1000000, Price: 810 },
+    { Plan: "C", Gender: "Perempuan", Age: 61, SumCovered: 1500000, Price: 694 },
+    { Plan: "A", Gender: "Lelaki", Age: 62, SumCovered: 180000, Price: 518 },
+    { Plan: "B", Gender: "Lelaki", Age: 62, SumCovered: 1000000, Price: 1160 },
+    { Plan: "C", Gender: "Lelaki", Age: 62, SumCovered: 1500000, Price: 726 },
+    { Plan: "A", Gender: "Perempuan", Age: 62, SumCovered: 180000, Price: 513 },
+    { Plan: "B", Gender: "Perempuan", Age: 62, SumCovered: 1000000, Price: 840 },
+    { Plan: "C", Gender: "Perempuan", Age: 62, SumCovered: 1500000, Price: 696 },
+    { Plan: "A", Gender: "Lelaki", Age: 63, SumCovered: 180000, Price: 551 },
+    { Plan: "B", Gender: "Lelaki", Age: 63, SumCovered: 1000000, Price: 1210 },
+    { Plan: "C", Gender: "Lelaki", Age: 63, SumCovered: 1500000, Price: 727 },
+    { Plan: "A", Gender: "Perempuan", Age: 63, SumCovered: 180000, Price: 540 },
+    { Plan: "B", Gender: "Perempuan", Age: 63, SumCovered: 1000000, Price: 870 },
+    { Plan: "C", Gender: "Perempuan", Age: 63, SumCovered: 1500000, Price: 697 },
+    { Plan: "A", Gender: "Lelaki", Age: 64, SumCovered: 180000, Price: 648 },
+    { Plan: "B", Gender: "Lelaki", Age: 64, SumCovered: 1000000, Price: 1270 },
+    { Plan: "C", Gender: "Lelaki", Age: 64, SumCovered: 1500000, Price: 729 },
+    { Plan: "A", Gender: "Perempuan", Age: 64, SumCovered: 180000, Price: 610 },
+    { Plan: "B", Gender: "Perempuan", Age: 64, SumCovered: 1000000, Price: 910 },
+    { Plan: "C", Gender: "Perempuan", Age: 64, SumCovered: 1500000, Price: 698 },
+    { Plan: "A", Gender: "Lelaki", Age: 65, SumCovered: 180000, Price: 725 },
+    { Plan: "B", Gender: "Lelaki", Age: 65, SumCovered: 1000000, Price: 1330 },
+    { Plan: "C", Gender: "Lelaki", Age: 65, SumCovered: 1500000, Price: 729 },
+    { Plan: "A", Gender: "Perempuan", Age: 65, SumCovered: 180000, Price: 688 },
+    { Plan: "B", Gender: "Perempuan", Age: 65, SumCovered: 1000000, Price: 950 },
+    { Plan: "C", Gender: "Perempuan", Age: 65, SumCovered: 1500000, Price: 699 },
+    { Plan: "A", Gender: "Lelaki", Age: 66, SumCovered: 180000, Price: 826 },
+    { Plan: "B", Gender: "Lelaki", Age: 66, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Lelaki", Age: 66, SumCovered: 1500000, Price: 961 },
+    { Plan: "A", Gender: "Perempuan", Age: 66, SumCovered: 180000, Price: 783 },
+    { Plan: "B", Gender: "Perempuan", Age: 66, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Perempuan", Age: 66, SumCovered: 1500000, Price: 942 },
+    { Plan: "A", Gender: "Lelaki", Age: 67, SumCovered: 180000, Price: 857 },
+    { Plan: "B", Gender: "Lelaki", Age: 67, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Lelaki", Age: 67, SumCovered: 1500000, Price: 962 },
+    { Plan: "A", Gender: "Perempuan", Age: 67, SumCovered: 180000, Price: 833 },
+    { Plan: "B", Gender: "Perempuan", Age: 67, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Perempuan", Age: 67, SumCovered: 1500000, Price: 944 },
+    { Plan: "A", Gender: "Lelaki", Age: 68, SumCovered: 180000, Price: 919 },
+    { Plan: "B", Gender: "Lelaki", Age: 68, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Lelaki", Age: 68, SumCovered: 1500000, Price: 965 },
+    { Plan: "A", Gender: "Perempuan", Age: 68, SumCovered: 180000, Price: 874 },
+    { Plan: "B", Gender: "Perempuan", Age: 68, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Perempuan", Age: 68, SumCovered: 1500000, Price: 946 },
+    { Plan: "A", Gender: "Lelaki", Age: 69, SumCovered: 180000, Price: 981 },
+    { Plan: "B", Gender: "Lelaki", Age: 69, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Lelaki", Age: 69, SumCovered: 1500000, Price: 968 },
+    { Plan: "A", Gender: "Perempuan", Age: 69, SumCovered: 180000, Price: 941 },
+    { Plan: "B", Gender: "Perempuan", Age: 69, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Perempuan", Age: 69, SumCovered: 1500000, Price: 949 },
+    { Plan: "A", Gender: "Lelaki", Age: 70, SumCovered: 180000, Price: 1053 },
+    { Plan: "B", Gender: "Lelaki", Age: 70, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Lelaki", Age: 70, SumCovered: 1500000, Price: 971 },
+    { Plan: "A", Gender: "Perempuan", Age: 70, SumCovered: 180000, Price: 1042 },
+    { Plan: "B", Gender: "Perempuan", Age: 70, SumCovered: 1000000, Price: "Melebihi Had Umur" },
+    { Plan: "C", Gender: "Perempuan", Age: 70, SumCovered: 1500000, Price: 952 }
+];
+
+        // Hibah Takaful Database
+const hibahTakafulDB = [
+    { Plan: "A", Gender: "Lelaki", Age: 21, SumCovered: 250000, Price: 122 },
+    { Plan: "A", Gender: "Lelaki", Age: 21, SumCovered: 250000, Price: 122 },
+    { Plan: "B", Gender: "Lelaki", Age: 21, SumCovered: 250000, Price: 42 },
+    { Plan: "C", Gender: "Lelaki", Age: 21, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 21, SumCovered: 250000, Price: 117 },
+    { Plan: "B", Gender: "Perempuan", Age: 21, SumCovered: 250000, Price: 25 },
+    { Plan: "C", Gender: "Perempuan", Age: 21, SumCovered: 250000, Price: 82 },
+    { Plan: "A", Gender: "Lelaki", Age: 22, SumCovered: 250000, Price: 125 },
+    { Plan: "B", Gender: "Lelaki", Age: 22, SumCovered: 250000, Price: 45 },
+    { Plan: "C", Gender: "Lelaki", Age: 22, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 22, SumCovered: 250000, Price: 120 },
+    { Plan: "B", Gender: "Perempuan", Age: 22, SumCovered: 250000, Price: 28 },
+    { Plan: "C", Gender: "Perempuan", Age: 22, SumCovered: 250000, Price: 82 },
+    { Plan: "A", Gender: "Lelaki", Age: 23, SumCovered: 250000, Price: 127 },
+    { Plan: "B", Gender: "Lelaki", Age: 23, SumCovered: 250000, Price: 47 },
+    { Plan: "C", Gender: "Lelaki", Age: 23, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 23, SumCovered: 250000, Price: 122 },
+    { Plan: "B", Gender: "Perempuan", Age: 23, SumCovered: 250000, Price: 28 },
+    { Plan: "C", Gender: "Perempuan", Age: 23, SumCovered: 250000, Price: 82 },
+    { Plan: "A", Gender: "Lelaki", Age: 24, SumCovered: 250000, Price: 131 },
+    { Plan: "B", Gender: "Lelaki", Age: 24, SumCovered: 250000, Price: 50 },
+    { Plan: "C", Gender: "Lelaki", Age: 24, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 24, SumCovered: 250000, Price: 125 },
+    { Plan: "B", Gender: "Perempuan", Age: 24, SumCovered: 250000, Price: 31 },
+    { Plan: "C", Gender: "Perempuan", Age: 24, SumCovered: 250000, Price: 82 },
+    { Plan: "A", Gender: "Lelaki", Age: 25, SumCovered: 250000, Price: 133 },
+    { Plan: "B", Gender: "Lelaki", Age: 25, SumCovered: 250000, Price: 53 },
+    { Plan: "C", Gender: "Lelaki", Age: 25, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 25, SumCovered: 250000, Price: 128 },
+    { Plan: "B", Gender: "Perempuan", Age: 25, SumCovered: 250000, Price: 31 },
+    { Plan: "C", Gender: "Perempuan", Age: 25, SumCovered: 250000, Price: 82 },
+    { Plan: "A", Gender: "Lelaki", Age: 26, SumCovered: 250000, Price: 138 },
+    { Plan: "B", Gender: "Lelaki", Age: 26, SumCovered: 250000, Price: 56 },
+    { Plan: "C", Gender: "Lelaki", Age: 26, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 26, SumCovered: 250000, Price: 131 },
+    { Plan: "B", Gender: "Perempuan", Age: 26, SumCovered: 250000, Price: 34 },
+    { Plan: "C", Gender: "Perempuan", Age: 26, SumCovered: 250000, Price: 83 },
+    { Plan: "A", Gender: "Lelaki", Age: 27, SumCovered: 250000, Price: 141 },
+    { Plan: "B", Gender: "Lelaki", Age: 27, SumCovered: 250000, Price: 61 },
+    { Plan: "C", Gender: "Lelaki", Age: 27, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 27, SumCovered: 250000, Price: 134 },
+    { Plan: "B", Gender: "Perempuan", Age: 27, SumCovered: 250000, Price: 36 },
+    { Plan: "C", Gender: "Perempuan", Age: 27, SumCovered: 250000, Price: 83 },
+    { Plan: "A", Gender: "Lelaki", Age: 28, SumCovered: 250000, Price: 145 },
+    { Plan: "B", Gender: "Lelaki", Age: 28, SumCovered: 250000, Price: 64 },
+    { Plan: "C", Gender: "Lelaki", Age: 28, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 28, SumCovered: 250000, Price: 137 },
+    { Plan: "B", Gender: "Perempuan", Age: 28, SumCovered: 250000, Price: 39 },
+    { Plan: "C", Gender: "Perempuan", Age: 28, SumCovered: 250000, Price: 83 },
+    { Plan: "A", Gender: "Lelaki", Age: 29, SumCovered: 250000, Price: 146 },
+    { Plan: "B", Gender: "Lelaki", Age: 29, SumCovered: 250000, Price: 69 },
+    { Plan: "C", Gender: "Lelaki", Age: 29, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 29, SumCovered: 250000, Price: 140 },
+    { Plan: "B", Gender: "Perempuan", Age: 29, SumCovered: 250000, Price: 42 },
+    { Plan: "C", Gender: "Perempuan", Age: 29, SumCovered: 250000, Price: 83 },
+    { Plan: "A", Gender: "Lelaki", Age: 30, SumCovered: 250000, Price: 150 },
+    { Plan: "B", Gender: "Lelaki", Age: 30, SumCovered: 250000, Price: 75 },
+    { Plan: "C", Gender: "Lelaki", Age: 30, SumCovered: 250000, Price: 52 },
+    { Plan: "A", Gender: "Perempuan", Age: 30, SumCovered: 250000, Price: 144 },
+    { Plan: "B", Gender: "Perempuan", Age: 30, SumCovered: 250000, Price: 45 },
+    { Plan: "C", Gender: "Perempuan", Age: 30, SumCovered: 250000, Price: 84 },
+    { Plan: "A", Gender: "Lelaki", Age: 31, SumCovered: 250000, Price: 154 },
+    { Plan: "B", Gender: "Lelaki", Age: 31, SumCovered: 250000, Price: 83 },
+    { Plan: "C", Gender: "Lelaki", Age: 31, SumCovered: 250000, Price: 55 },
+    { Plan: "A", Gender: "Perempuan", Age: 31, SumCovered: 250000, Price: 147 },
+    { Plan: "B", Gender: "Perempuan", Age: 31, SumCovered: 250000, Price: 50 },
+    { Plan: "C", Gender: "Perempuan", Age: 31, SumCovered: 250000, Price: 84 },
+    { Plan: "A", Gender: "Lelaki", Age: 32, SumCovered: 250000, Price: 159 },
+    { Plan: "B", Gender: "Lelaki", Age: 32, SumCovered: 250000, Price: 89 },
+    { Plan: "C", Gender: "Lelaki", Age: 32, SumCovered: 250000, Price: 59 },
+    { Plan: "A", Gender: "Perempuan", Age: 32, SumCovered: 250000, Price: 151 },
+    { Plan: "B", Gender: "Perempuan", Age: 32, SumCovered: 250000, Price: 53 },
+    { Plan: "C", Gender: "Perempuan", Age: 32, SumCovered: 250000, Price: 84 },
+    { Plan: "A", Gender: "Lelaki", Age: 33, SumCovered: 250000, Price: 164 },
+    { Plan: "B", Gender: "Lelaki", Age: 33, SumCovered: 250000, Price: 97 },
+    { Plan: "C", Gender: "Lelaki", Age: 33, SumCovered: 250000, Price: 60 },
+    { Plan: "A", Gender: "Perempuan", Age: 33, SumCovered: 250000, Price: 155 },
+    { Plan: "B", Gender: "Perempuan", Age: 33, SumCovered: 250000, Price: 58 },
+    { Plan: "C", Gender: "Perempuan", Age: 33, SumCovered: 250000, Price: 85 },
+    { Plan: "A", Gender: "Lelaki", Age: 34, SumCovered: 250000, Price: 168 },
+    { Plan: "B", Gender: "Lelaki", Age: 34, SumCovered: 250000, Price: 105 },
+    { Plan: "C", Gender: "Lelaki", Age: 34, SumCovered: 250000, Price: 60 },
+    { Plan: "A", Gender: "Perempuan", Age: 34, SumCovered: 250000, Price: 160 },
+    { Plan: "B", Gender: "Perempuan", Age: 34, SumCovered: 250000, Price: 64 },
+    { Plan: "C", Gender: "Perempuan", Age: 34, SumCovered: 250000, Price: 85 },
+    { Plan: "A", Gender: "Lelaki", Age: 35, SumCovered: 250000, Price: 174 },
+    { Plan: "B", Gender: "Lelaki", Age: 35, SumCovered: 250000, Price: 116 },
+    { Plan: "C", Gender: "Lelaki", Age: 35, SumCovered: 250000, Price: 61 },
+    { Plan: "A", Gender: "Perempuan", Age: 35, SumCovered: 250000, Price: 164 },
+    { Plan: "B", Gender: "Perempuan", Age: 35, SumCovered: 250000, Price: 69 },
+    { Plan: "C", Gender: "Perempuan", Age: 35, SumCovered: 250000, Price: 86 },
+    { Plan: "A", Gender: "Lelaki", Age: 36, SumCovered: 250000, Price: 179 },
+    { Plan: "B", Gender: "Lelaki", Age: 36, SumCovered: 250000, Price: 127 },
+    { Plan: "C", Gender: "Lelaki", Age: 36, SumCovered: 250000, Price: 64 },
+    { Plan: "A", Gender: "Perempuan", Age: 36, SumCovered: 250000, Price: 169 },
+    { Plan: "B", Gender: "Perempuan", Age: 36, SumCovered: 250000, Price: 78 },
+    { Plan: "C", Gender: "Perempuan", Age: 36, SumCovered: 250000, Price: 86 },
+    { Plan: "A", Gender: "Lelaki", Age: 37, SumCovered: 250000, Price: 188 },
+    { Plan: "B", Gender: "Lelaki", Age: 37, SumCovered: 250000, Price: 141 },
+    { Plan: "C", Gender: "Lelaki", Age: 37, SumCovered: 250000, Price: 67 },
+    { Plan: "A", Gender: "Perempuan", Age: 37, SumCovered: 250000, Price: 175 },
+    { Plan: "B", Gender: "Perempuan", Age: 37, SumCovered: 250000, Price: 86 },
+    { Plan: "C", Gender: "Perempuan", Age: 37, SumCovered: 250000, Price: 87 },
+    { Plan: "A", Gender: "Lelaki", Age: 38, SumCovered: 250000, Price: 191 },
+    { Plan: "B", Gender: "Lelaki", Age: 38, SumCovered: 250000, Price: 152 },
+    { Plan: "C", Gender: "Lelaki", Age: 38, SumCovered: 250000, Price: 72 },
+    { Plan: "A", Gender: "Perempuan", Age: 38, SumCovered: 250000, Price: 180 },
+    { Plan: "B", Gender: "Perempuan", Age: 38, SumCovered: 250000, Price: 94 },
+    { Plan: "C", Gender: "Perempuan", Age: 38, SumCovered: 250000, Price: 87 },
+    { Plan: "A", Gender: "Lelaki", Age: 39, SumCovered: 250000, Price: 198 },
+    { Plan: "B", Gender: "Lelaki", Age: 39, SumCovered: 250000, Price: 169 },
+    { Plan: "C", Gender: "Lelaki", Age: 39, SumCovered: 250000, Price: 77 },
+    { Plan: "A", Gender: "Perempuan", Age: 39, SumCovered: 250000, Price: 186 },
+    { Plan: "B", Gender: "Perempuan", Age: 39, SumCovered: 250000, Price: 103 },
+    { Plan: "C", Gender: "Perempuan", Age: 39, SumCovered: 250000, Price: 88 },
+    { Plan: "A", Gender: "Lelaki", Age: 40, SumCovered: 250000, Price: 205 },
+    { Plan: "B", Gender: "Lelaki", Age: 40, SumCovered: 250000, Price: 185 },
+    { Plan: "C", Gender: "Lelaki", Age: 40, SumCovered: 250000, Price: 86 },
+    { Plan: "A", Gender: "Perempuan", Age: 40, SumCovered: 250000, Price: 193 },
+    { Plan: "B", Gender: "Perempuan", Age: 40, SumCovered: 250000, Price: 114 },
+    { Plan: "C", Gender: "Perempuan", Age: 40, SumCovered: 250000, Price: 89 },
+    { Plan: "A", Gender: "Lelaki", Age: 41, SumCovered: 250000, Price: 213 },
+    { Plan: "B", Gender: "Lelaki", Age: 41, SumCovered: 250000, Price: 202 },
+    { Plan: "C", Gender: "Lelaki", Age: 41, SumCovered: 250000, Price: 129 },
+    { Plan: "A", Gender: "Perempuan", Age: 41, SumCovered: 250000, Price: 200 },
+    { Plan: "B", Gender: "Perempuan", Age: 41, SumCovered: 250000, Price: 127 },
+    { Plan: "C", Gender: "Perempuan", Age: 41, SumCovered: 250000, Price: 98 },
+    { Plan: "A", Gender: "Lelaki", Age: 42, SumCovered: 250000, Price: 224 },
+    { Plan: "B", Gender: "Lelaki", Age: 42, SumCovered: 250000, Price: 221 },
+    { Plan: "C", Gender: "Lelaki", Age: 42, SumCovered: 250000, Price: 132 },
+    { Plan: "A", Gender: "Perempuan", Age: 42, SumCovered: 250000, Price: 207 },
+    { Plan: "B", Gender: "Perempuan", Age: 42, SumCovered: 250000, Price: 138 },
+    { Plan: "C", Gender: "Perempuan", Age: 42, SumCovered: 250000, Price: 101 },
+    { Plan: "A", Gender: "Lelaki", Age: 43, SumCovered: 250000, Price: 230 },
+    { Plan: "B", Gender: "Lelaki", Age: 43, SumCovered: 250000, Price: 243 },
+    { Plan: "C", Gender: "Lelaki", Age: 43, SumCovered: 250000, Price: 135 },
+    { Plan: "A", Gender: "Perempuan", Age: 43, SumCovered: 250000, Price: 215 },
+    { Plan: "B", Gender: "Perempuan", Age: 43, SumCovered: 250000, Price: 155 },
+    { Plan: "C", Gender: "Perempuan", Age: 43, SumCovered: 250000, Price: 103 },
+    { Plan: "A", Gender: "Lelaki", Age: 44, SumCovered: 250000, Price: 239 },
+    { Plan: "B", Gender: "Lelaki", Age: 44, SumCovered: 250000, Price: 265 },
+    { Plan: "C", Gender: "Lelaki", Age: 44, SumCovered: 250000, Price: 138 },
+    { Plan: "A", Gender: "Perempuan", Age: 44, SumCovered: 250000, Price: 224 },
+    { Plan: "B", Gender: "Perempuan", Age: 44, SumCovered: 250000, Price: 172 },
+    { Plan: "C", Gender: "Perempuan", Age: 44, SumCovered: 250000, Price: 105 },
+    { Plan: "A", Gender: "Lelaki", Age: 45, SumCovered: 250000, Price: 248 },
+    { Plan: "B", Gender: "Lelaki", Age: 45, SumCovered: 250000, Price: 293 },
+    { Plan: "C", Gender: "Lelaki", Age: 45, SumCovered: 250000, Price: 142 },
+    { Plan: "A", Gender: "Perempuan", Age: 45, SumCovered: 250000, Price: 232 },
+    { Plan: "B", Gender: "Perempuan", Age: 45, SumCovered: 250000, Price: 188 },
+    { Plan: "C", Gender: "Perempuan", Age: 45, SumCovered: 250000, Price: 108 },
+    { Plan: "A", Gender: "Lelaki", Age: 46, SumCovered: 250000, Price: 262 },
+    { Plan: "B", Gender: "Lelaki", Age: 46, SumCovered: 250000, Price: 321 },
+    { Plan: "C", Gender: "Lelaki", Age: 46, SumCovered: 250000, Price: 147 },
+    { Plan: "A", Gender: "Perempuan", Age: 46, SumCovered: 250000, Price: 241 },
+    { Plan: "B", Gender: "Perempuan", Age: 46, SumCovered: 250000, Price: 210 },
+    { Plan: "C", Gender: "Perempuan", Age: 46, SumCovered: 250000, Price: 112 },
+    { Plan: "A", Gender: "Lelaki", Age: 47, SumCovered: 250000, Price: 268 },
+    { Plan: "B", Gender: "Lelaki", Age: 47, SumCovered: 250000, Price: 354 },
+    { Plan: "C", Gender: "Lelaki", Age: 47, SumCovered: 250000, Price: 153 },
+    { Plan: "A", Gender: "Perempuan", Age: 47, SumCovered: 250000, Price: 251 },
+    { Plan: "B", Gender: "Perempuan", Age: 47, SumCovered: 250000, Price: 232 },
+    { Plan: "C", Gender: "Perempuan", Age: 47, SumCovered: 250000, Price: 117 },
+    { Plan: "A", Gender: "Lelaki", Age: 48, SumCovered: 250000, Price: 279 },
+    { Plan: "B", Gender: "Lelaki", Age: 48, SumCovered: 250000, Price: 390 },
+    { Plan: "C", Gender: "Lelaki", Age: 48, SumCovered: 250000, Price: 154 },
+    { Plan: "A", Gender: "Perempuan", Age: 48, SumCovered: 250000, Price: 261 },
+    { Plan: "B", Gender: "Perempuan", Age: 48, SumCovered: 250000, Price: 257 },
+    { Plan: "C", Gender: "Perempuan", Age: 48, SumCovered: 250000, Price: 118 },
+    { Plan: "A", Gender: "Lelaki", Age: 49, SumCovered: 250000, Price: 294 },
+    { Plan: "B", Gender: "Lelaki", Age: 49, SumCovered: 250000, Price: 431 },
+    { Plan: "C", Gender: "Lelaki", Age: 49, SumCovered: 250000, Price: 155 },
+    { Plan: "A", Gender: "Perempuan", Age: 49, SumCovered: 250000, Price: 272 },
+    { Plan: "B", Gender: "Perempuan", Age: 49, SumCovered: 250000, Price: 285 },
+    { Plan: "C", Gender: "Perempuan", Age: 49, SumCovered: 250000, Price: 118 },
+    { Plan: "A", Gender: "Lelaki", Age: 50, SumCovered: 250000, Price: 388 },
+    { Plan: "B", Gender: "Lelaki", Age: 50, SumCovered: 250000, Price: 288 },
+    { Plan: "C", Gender: "Lelaki", Age: 50, SumCovered: 250000, Price: 156 },
+    { Plan: "A", Gender: "Perempuan", Age: 50, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 50, SumCovered: 250000, Price: 180 },
+    { Plan: "C", Gender: "Perempuan", Age: 50, SumCovered: 250000, Price: 119 },
+    { Plan: "A", Gender: "Lelaki", Age: 51, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 51, SumCovered: 250000, Price: 312 },
+    { Plan: "C", Gender: "Lelaki", Age: 51, SumCovered: 250000, Price: 363 },
+    { Plan: "A", Gender: "Perempuan", Age: 51, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 51, SumCovered: 250000, Price: 199 },
+    { Plan: "C", Gender: "Perempuan", Age: 51, SumCovered: 250000, Price: 276 },
+    { Plan: "A", Gender: "Lelaki", Age: 52, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 52, SumCovered: 250000, Price: 343 },
+    { Plan: "C", Gender: "Lelaki", Age: 52, SumCovered: 250000, Price: 372 },
+    { Plan: "A", Gender: "Perempuan", Age: 52, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 52, SumCovered: 250000, Price: 221 },
+    { Plan: "C", Gender: "Perempuan", Age: 52, SumCovered: 250000, Price: 282 },
+    { Plan: "A", Gender: "Lelaki", Age: 53, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 53, SumCovered: 250000, Price: 376 },
+    { Plan: "C", Gender: "Lelaki", Age: 53, SumCovered: 250000, Price: 381 },
+    { Plan: "A", Gender: "Perempuan", Age: 53, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 53, SumCovered: 250000, Price: 243 },
+    { Plan: "C", Gender: "Perempuan", Age: 53, SumCovered: 250000, Price: 289 },
+    { Plan: "A", Gender: "Lelaki", Age: 54, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 54, SumCovered: 250000, Price: 414 },
+    { Plan: "C", Gender: "Lelaki", Age: 54, SumCovered: 250000, Price: 391 },
+    { Plan: "A", Gender: "Perempuan", Age: 54, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 54, SumCovered: 250000, Price: 271 },
+    { Plan: "C", Gender: "Perempuan", Age: 54, SumCovered: 250000, Price: 295 },
+    { Plan: "A", Gender: "Lelaki", Age: 55, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 55, SumCovered: 250000, Price: 453 },
+    { Plan: "C", Gender: "Lelaki", Age: 55, SumCovered: 250000, Price: 401 },
+    { Plan: "A", Gender: "Perempuan", Age: 55, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 55, SumCovered: 250000, Price: 301 },
+    { Plan: "C", Gender: "Perempuan", Age: 55, SumCovered: 250000, Price: 302 },
+    { Plan: "A", Gender: "Lelaki", Age: 56, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 56, SumCovered: 250000, Price: 500 },
+    { Plan: "C", Gender: "Lelaki", Age: 56, SumCovered: 250000, Price: 413 },
+    { Plan: "A", Gender: "Perempuan", Age: 56, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 56, SumCovered: 250000, Price: 332 },
+    { Plan: "C", Gender: "Perempuan", Age: 56, SumCovered: 250000, Price: 310 },
+    { Plan: "A", Gender: "Lelaki", Age: 57, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 57, SumCovered: 250000, Price: 552 },
+    { Plan: "C", Gender: "Lelaki", Age: 57, SumCovered: 250000, Price: 430 },
+    { Plan: "A", Gender: "Perempuan", Age: 57, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 57, SumCovered: 250000, Price: 368 },
+    { Plan: "C", Gender: "Perempuan", Age: 57, SumCovered: 250000, Price: 321 },
+    { Plan: "A", Gender: "Lelaki", Age: 58, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 58, SumCovered: 250000, Price: 608 },
+    { Plan: "C", Gender: "Lelaki", Age: 58, SumCovered: 250000, Price: 456 },
+    { Plan: "A", Gender: "Perempuan", Age: 58, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 58, SumCovered: 250000, Price: 409 },
+    { Plan: "C", Gender: "Perempuan", Age: 58, SumCovered: 250000, Price: 339 },
+    { Plan: "A", Gender: "Lelaki", Age: 59, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 59, SumCovered: 250000, Price: 671 },
+    { Plan: "C", Gender: "Lelaki", Age: 59, SumCovered: 250000, Price: 462 },
+    { Plan: "A", Gender: "Perempuan", Age: 59, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 59, SumCovered: 250000, Price: 456 },
+    { Plan: "C", Gender: "Perempuan", Age: 59, SumCovered: 250000, Price: 342 },
+    { Plan: "A", Gender: "Lelaki", Age: 60, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Lelaki", Age: 60, SumCovered: 250000, Price: 472 },
+    { Plan: "C", Gender: "Lelaki", Age: 60, SumCovered: 250000, Price: 468 },
+    { Plan: "A", Gender: "Perempuan", Age: 60, SumCovered: 250000, Price: "N/A" },
+    { Plan: "B", Gender: "Perempuan", Age: 60, SumCovered: 250000, Price: 304 },
+    { Plan: "C", Gender: "Perempuan", Age: 60, SumCovered: 250000, Price: 344 },
+    { Plan: "A", Gender: "Lelaki", Age: 21, SumCovered: 350000, Price: 81 },
+    { Plan: "B", Gender: "Lelaki", Age: 21, SumCovered: 350000, Price: 58 },
+    { Plan: "C", Gender: "Lelaki", Age: 21, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 21, SumCovered: 350000, Price: 47 },
+    { Plan: "B", Gender: "Perempuan", Age: 21, SumCovered: 350000, Price: 35 },
+    { Plan: "C", Gender: "Perempuan", Age: 21, SumCovered: 350000, Price: 115 },
+    { Plan: "A", Gender: "Lelaki", Age: 22, SumCovered: 350000, Price: 81 },
+    { Plan: "B", Gender: "Lelaki", Age: 22, SumCovered: 350000, Price: 62 },
+    { Plan: "C", Gender: "Lelaki", Age: 22, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 22, SumCovered: 350000, Price: 49 },
+    { Plan: "B", Gender: "Perempuan", Age: 22, SumCovered: 350000, Price: 39 },
+    { Plan: "C", Gender: "Perempuan", Age: 22, SumCovered: 350000, Price: 115 },
+    { Plan: "A", Gender: "Lelaki", Age: 23, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 23, SumCovered: 350000, Price: 66 },
+    { Plan: "C", Gender: "Lelaki", Age: 23, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 23, SumCovered: 350000, Price: 51 },
+    { Plan: "B", Gender: "Perempuan", Age: 23, SumCovered: 350000, Price: 39 },
+    { Plan: "C", Gender: "Perempuan", Age: 23, SumCovered: 350000, Price: 115 },
+    { Plan: "A", Gender: "Lelaki", Age: 24, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 24, SumCovered: 350000, Price: 70 },
+    { Plan: "C", Gender: "Lelaki", Age: 24, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 24, SumCovered: 350000, Price: 53 },
+    { Plan: "B", Gender: "Perempuan", Age: 24, SumCovered: 350000, Price: 43 },
+    { Plan: "C", Gender: "Perempuan", Age: 24, SumCovered: 350000, Price: 115 },
+    { Plan: "A", Gender: "Lelaki", Age: 25, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 25, SumCovered: 350000, Price: 74 },
+    { Plan: "C", Gender: "Lelaki", Age: 25, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 25, SumCovered: 350000, Price: 55 },
+    { Plan: "B", Gender: "Perempuan", Age: 25, SumCovered: 350000, Price: 43 },
+    { Plan: "C", Gender: "Perempuan", Age: 25, SumCovered: 350000, Price: 115 },
+    { Plan: "A", Gender: "Lelaki", Age: 26, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 26, SumCovered: 350000, Price: 78 },
+    { Plan: "C", Gender: "Lelaki", Age: 26, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 26, SumCovered: 350000, Price: 57 },
+    { Plan: "B", Gender: "Perempuan", Age: 26, SumCovered: 350000, Price: 47 },
+    { Plan: "C", Gender: "Perempuan", Age: 26, SumCovered: 350000, Price: 116 },
+    { Plan: "A", Gender: "Lelaki", Age: 27, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 27, SumCovered: 350000, Price: 86 },
+    { Plan: "C", Gender: "Lelaki", Age: 27, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 27, SumCovered: 350000, Price: 60 },
+    { Plan: "B", Gender: "Perempuan", Age: 27, SumCovered: 350000, Price: 51 },
+    { Plan: "C", Gender: "Perempuan", Age: 27, SumCovered: 350000, Price: 116 },
+    { Plan: "A", Gender: "Lelaki", Age: 28, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 28, SumCovered: 350000, Price: 89 },
+    { Plan: "C", Gender: "Lelaki", Age: 28, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 28, SumCovered: 350000, Price: 62 },
+    { Plan: "B", Gender: "Perempuan", Age: 28, SumCovered: 350000, Price: 55 },
+    { Plan: "C", Gender: "Perempuan", Age: 28, SumCovered: 350000, Price: 116 },
+    { Plan: "A", Gender: "Lelaki", Age: 29, SumCovered: 350000, Price: 82 },
+    { Plan: "B", Gender: "Lelaki", Age: 29, SumCovered: 350000, Price: 97 },
+    { Plan: "C", Gender: "Lelaki", Age: 29, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 29, SumCovered: 350000, Price: 66 },
+    { Plan: "B", Gender: "Perempuan", Age: 29, SumCovered: 350000, Price: 58 },
+    { Plan: "C", Gender: "Perempuan", Age: 29, SumCovered: 350000, Price: 116 },
+    { Plan: "A", Gender: "Lelaki", Age: 30, SumCovered: 350000, Price: 84 },
+    { Plan: "B", Gender: "Lelaki", Age: 30, SumCovered: 350000, Price: 105 },
+    { Plan: "C", Gender: "Lelaki", Age: 30, SumCovered: 350000, Price: 73 },
+    { Plan: "A", Gender: "Perempuan", Age: 30, SumCovered: 350000, Price: 69 },
+    { Plan: "B", Gender: "Perempuan", Age: 30, SumCovered: 350000, Price: 620 },
+    { Plan: "C", Gender: "Perempuan", Age: 30, SumCovered: 350000, Price: 117 },
+    { Plan: "A", Gender: "Lelaki", Age: 31, SumCovered: 350000, Price: 88 },
+    { Plan: "B", Gender: "Lelaki", Age: 31, SumCovered: 350000, Price: 116 },
+    { Plan: "C", Gender: "Lelaki", Age: 31, SumCovered: 350000, Price: 78 },
+    { Plan: "A", Gender: "Perempuan", Age: 31, SumCovered: 350000, Price: 73 },
+    { Plan: "B", Gender: "Perempuan", Age: 31, SumCovered: 350000, Price: 70 },
+    { Plan: "C", Gender: "Perempuan", Age: 31, SumCovered: 350000, Price: 118 },
+    { Plan: "A", Gender: "Lelaki", Age: 32, SumCovered: 350000, Price: 91 },
+    { Plan: "B", Gender: "Lelaki", Age: 32, SumCovered: 350000, Price: 124 },
+    { Plan: "C", Gender: "Lelaki", Age: 32, SumCovered: 350000, Price: 83 },
+    { Plan: "A", Gender: "Perempuan", Age: 32, SumCovered: 350000, Price: 79 },
+    { Plan: "B", Gender: "Perempuan", Age: 32, SumCovered: 350000, Price: 74 },
+    { Plan: "C", Gender: "Perempuan", Age: 32, SumCovered: 350000, Price: 118 },
+    { Plan: "A", Gender: "Lelaki", Age: 33, SumCovered: 350000, Price: 95 },
+    { Plan: "B", Gender: "Lelaki", Age: 33, SumCovered: 350000, Price: 136 },
+    { Plan: "C", Gender: "Lelaki", Age: 33, SumCovered: 350000, Price: 83 },
+    { Plan: "A", Gender: "Perempuan", Age: 33, SumCovered: 350000, Price: 83 },
+    { Plan: "B", Gender: "Perempuan", Age: 33, SumCovered: 350000, Price: 82 },
+    { Plan: "C", Gender: "Perempuan", Age: 33, SumCovered: 350000, Price: 119 },
+    { Plan: "A", Gender: "Lelaki", Age: 34, SumCovered: 350000, Price: 100 },
+    { Plan: "B", Gender: "Lelaki", Age: 34, SumCovered: 350000, Price: 147 },
+    { Plan: "C", Gender: "Lelaki", Age: 34, SumCovered: 350000, Price: 85 },
+    { Plan: "A", Gender: "Perempuan", Age: 34, SumCovered: 350000, Price: 88 },
+    { Plan: "B", Gender: "Perempuan", Age: 34, SumCovered: 350000, Price: 89 },
+    { Plan: "C", Gender: "Perempuan", Age: 34, SumCovered: 350000, Price: 119 },
+    { Plan: "A", Gender: "Lelaki", Age: 35, SumCovered: 350000, Price: 105 },
+    { Plan: "B", Gender: "Lelaki", Age: 35, SumCovered: 350000, Price: 163 },
+    { Plan: "C", Gender: "Lelaki", Age: 35, SumCovered: 350000, Price: 85 },
+    { Plan: "A", Gender: "Perempuan", Age: 35, SumCovered: 350000, Price: 94 },
+    { Plan: "B", Gender: "Perempuan", Age: 35, SumCovered: 350000, Price: 97 },
+    { Plan: "C", Gender: "Perempuan", Age: 35, SumCovered: 350000, Price: 120 },
+    { Plan: "A", Gender: "Lelaki", Age: 36, SumCovered: 350000, Price: 110 },
+    { Plan: "B", Gender: "Lelaki", Age: 36, SumCovered: 350000, Price: 178 },
+    { Plan: "C", Gender: "Lelaki", Age: 36, SumCovered: 350000, Price: 89 },
+    { Plan: "A", Gender: "Perempuan", Age: 36, SumCovered: 350000, Price: 101 },
+    { Plan: "B", Gender: "Perempuan", Age: 36, SumCovered: 350000, Price: 109 },
+    { Plan: "C", Gender: "Perempuan", Age: 36, SumCovered: 350000, Price: 121 },
+    { Plan: "A", Gender: "Lelaki", Age: 37, SumCovered: 350000, Price: 116 },
+    { Plan: "B", Gender: "Lelaki", Age: 37, SumCovered: 350000, Price: 198 },
+    { Plan: "C", Gender: "Lelaki", Age: 37, SumCovered: 350000, Price: 94 },
+    { Plan: "A", Gender: "Perempuan", Age: 37, SumCovered: 350000, Price: 110 },
+    { Plan: "B", Gender: "Perempuan", Age: 37, SumCovered: 350000, Price: 120 },
+    { Plan: "C", Gender: "Perempuan", Age: 37, SumCovered: 350000, Price: 121 },
+    { Plan: "A", Gender: "Lelaki", Age: 38, SumCovered: 350000, Price: 123 },
+    { Plan: "B", Gender: "Lelaki", Age: 38, SumCovered: 350000, Price: 213 },
+    { Plan: "C", Gender: "Lelaki", Age: 38, SumCovered: 350000, Price: 100 },
+    { Plan: "A", Gender: "Perempuan", Age: 38, SumCovered: 350000, Price: 117 },
+    { Plan: "B", Gender: "Perempuan", Age: 38, SumCovered: 350000, Price: 132 },
+    { Plan: "C", Gender: "Perempuan", Age: 38, SumCovered: 350000, Price: 122 },
+    { Plan: "A", Gender: "Lelaki", Age: 39, SumCovered: 350000, Price: 131 },
+    { Plan: "B", Gender: "Lelaki", Age: 39, SumCovered: 350000, Price: 236 },
+    { Plan: "C", Gender: "Lelaki", Age: 39, SumCovered: 350000, Price: 108 },
+    { Plan: "A", Gender: "Perempuan", Age: 39, SumCovered: 350000, Price: 127 },
+    { Plan: "B", Gender: "Perempuan", Age: 39, SumCovered: 350000, Price: 143 },
+    { Plan: "C", Gender: "Perempuan", Age: 39, SumCovered: 350000, Price: 123 },
+    { Plan: "A", Gender: "Lelaki", Age: 40, SumCovered: 350000, Price: 138 },
+    { Plan: "B", Gender: "Lelaki", Age: 40, SumCovered: 350000, Price: 259 },
+    { Plan: "C", Gender: "Lelaki", Age: 40, SumCovered: 350000, Price: 120 },
+    { Plan: "A", Gender: "Perempuan", Age: 40, SumCovered: 350000, Price: 140 },
+    { Plan: "B", Gender: "Perempuan", Age: 40, SumCovered: 350000, Price: 159 },
+    { Plan: "C", Gender: "Perempuan", Age: 40, SumCovered: 350000, Price: 124 },
+    { Plan: "A", Gender: "Lelaki", Age: 41, SumCovered: 350000, Price: 147 },
+    { Plan: "B", Gender: "Lelaki", Age: 41, SumCovered: 350000, Price: 283 },
+    { Plan: "C", Gender: "Lelaki", Age: 41, SumCovered: 350000, Price: 181 },
+    { Plan: "A", Gender: "Perempuan", Age: 41, SumCovered: 350000, Price: 143 },
+    { Plan: "B", Gender: "Perempuan", Age: 41, SumCovered: 350000, Price: 178 },
+    { Plan: "C", Gender: "Perempuan", Age: 41, SumCovered: 350000, Price: 137 },
+    { Plan: "A", Gender: "Lelaki", Age: 42, SumCovered: 350000, Price: 153 },
+    { Plan: "B", Gender: "Lelaki", Age: 42, SumCovered: 350000, Price: 310 },
+    { Plan: "C", Gender: "Lelaki", Age: 42, SumCovered: 350000, Price: 185 },
+    { Plan: "A", Gender: "Perempuan", Age: 42, SumCovered: 350000, Price: 144 },
+    { Plan: "B", Gender: "Perempuan", Age: 42, SumCovered: 350000, Price: 194 },
+    { Plan: "C", Gender: "Perempuan", Age: 42, SumCovered: 350000, Price: 141 },
+    { Plan: "A", Gender: "Lelaki", Age: 43, SumCovered: 350000, Price: 160 },
+    { Plan: "B", Gender: "Lelaki", Age: 43, SumCovered: 350000, Price: 341 },
+    { Plan: "C", Gender: "Lelaki", Age: 43, SumCovered: 350000, Price: 189 },
+    { Plan: "A", Gender: "Perempuan", Age: 43, SumCovered: 350000, Price: 147 },
+    { Plan: "B", Gender: "Perempuan", Age: 43, SumCovered: 350000, Price: 217 },
+    { Plan: "C", Gender: "Perempuan", Age: 43, SumCovered: 350000, Price: 144 },
+    { Plan: "A", Gender: "Lelaki", Age: 44, SumCovered: 350000, Price: 167 },
+    { Plan: "B", Gender: "Lelaki", Age: 44, SumCovered: 350000, Price: 371 },
+    { Plan: "C", Gender: "Lelaki", Age: 44, SumCovered: 350000, Price: 193 },
+    { Plan: "A", Gender: "Perempuan", Age: 44, SumCovered: 350000, Price: 149 },
+    { Plan: "B", Gender: "Perempuan", Age: 44, SumCovered: 350000, Price: 240 },
+    { Plan: "C", Gender: "Perempuan", Age: 44, SumCovered: 350000, Price: 147 },
+    { Plan: "A", Gender: "Lelaki", Age: 45, SumCovered: 350000, Price: 175 },
+    { Plan: "B", Gender: "Lelaki", Age: 45, SumCovered: 350000, Price: 410 },
+    { Plan: "C", Gender: "Lelaki", Age: 45, SumCovered: 350000, Price: 198 },
+    { Plan: "A", Gender: "Perempuan", Age: 45, SumCovered: 350000, Price: 151 },
+    { Plan: "B", Gender: "Perempuan", Age: 45, SumCovered: 350000, Price: 263 },
+    { Plan: "C", Gender: "Perempuan", Age: 45, SumCovered: 350000, Price: 151 },
+    { Plan: "A", Gender: "Lelaki", Age: 46, SumCovered: 350000, Price: 184 },
+    { Plan: "B", Gender: "Lelaki", Age: 46, SumCovered: 350000, Price: 449 },
+    { Plan: "C", Gender: "Lelaki", Age: 46, SumCovered: 350000, Price: 205 },
+    { Plan: "A", Gender: "Perempuan", Age: 46, SumCovered: 350000, Price: 159 },
+    { Plan: "B", Gender: "Perempuan", Age: 46, SumCovered: 350000, Price: 294 },
+    { Plan: "C", Gender: "Perempuan", Age: 46, SumCovered: 350000, Price: 156 },
+    { Plan: "A", Gender: "Lelaki", Age: 47, SumCovered: 350000, Price: 193 },
+    { Plan: "B", Gender: "Lelaki", Age: 47, SumCovered: 350000, Price: 495 },
+    { Plan: "C", Gender: "Lelaki", Age: 47, SumCovered: 350000, Price: 214 },
+    { Plan: "A", Gender: "Perempuan", Age: 47, SumCovered: 350000, Price: 164 },
+    { Plan: "B", Gender: "Perempuan", Age: 47, SumCovered: 350000, Price: 325 },
+    { Plan: "C", Gender: "Perempuan", Age: 47, SumCovered: 350000, Price: 164 },
+    { Plan: "A", Gender: "Lelaki", Age: 48, SumCovered: 350000, Price: 208 },
+    { Plan: "B", Gender: "Lelaki", Age: 48, SumCovered: 350000, Price: 545 },
+    { Plan: "C", Gender: "Lelaki", Age: 48, SumCovered: 350000, Price: 215 },
+    { Plan: "A", Gender: "Perempuan", Age: 48, SumCovered: 350000, Price: 174 },
+    { Plan: "B", Gender: "Perempuan", Age: 48, SumCovered: 350000, Price: 360 },
+    { Plan: "C", Gender: "Perempuan", Age: 48, SumCovered: 350000, Price: 165 },
+    { Plan: "A", Gender: "Lelaki", Age: 49, SumCovered: 350000, Price: 228 },
+    { Plan: "B", Gender: "Lelaki", Age: 49, SumCovered: 350000, Price: 603 },
+    { Plan: "C", Gender: "Lelaki", Age: 49, SumCovered: 350000, Price: 217 },
+    { Plan: "A", Gender: "Perempuan", Age: 49, SumCovered: 350000, Price: 182 },
+    { Plan: "B", Gender: "Perempuan", Age: 49, SumCovered: 350000, Price: 398 },
+    { Plan: "C", Gender: "Perempuan", Age: 49, SumCovered: 350000, Price: 165 },
+    { Plan: "A", Gender: "Lelaki", Age: 50, SumCovered: 350000, Price: 398 },
+    { Plan: "B", Gender: "Lelaki", Age: 50, SumCovered: 350000, Price: 402 },
+    { Plan: "C", Gender: "Lelaki", Age: 50, SumCovered: 350000, Price: 218 },
+    { Plan: "A", Gender: "Perempuan", Age: 50, SumCovered: 350000, Price: 305 },
+    { Plan: "B", Gender: "Perempuan", Age: 50, SumCovered: 350000, Price: 252 },
+    { Plan: "C", Gender: "Perempuan", Age: 50, SumCovered: 350000, Price: 166 },
+    { Plan: "A", Gender: "Lelaki", Age: 51, SumCovered: 350000, Price: 442 },
+    { Plan: "B", Gender: "Lelaki", Age: 51, SumCovered: 350000, Price: 437 },
+    { Plan: "C", Gender: "Lelaki", Age: 51, SumCovered: 350000, Price: 508 },
+    { Plan: "A", Gender: "Perempuan", Age: 51, SumCovered: 350000, Price: 347 },
+    { Plan: "B", Gender: "Perempuan", Age: 51, SumCovered: 350000, Price: 279 },
+    { Plan: "C", Gender: "Perempuan", Age: 51, SumCovered: 350000, Price: 386 },
+    { Plan: "A", Gender: "Lelaki", Age: 52, SumCovered: 350000, Price: 492 },
+    { Plan: "B", Gender: "Lelaki", Age: 52, SumCovered: 350000, Price: 480 },
+    { Plan: "C", Gender: "Lelaki", Age: 52, SumCovered: 350000, Price: 521 },
+    { Plan: "A", Gender: "Perempuan", Age: 52, SumCovered: 350000, Price: 390 },
+    { Plan: "B", Gender: "Perempuan", Age: 52, SumCovered: 350000, Price: 310 },
+    { Plan: "C", Gender: "Perempuan", Age: 52, SumCovered: 350000, Price: 395 },
+    { Plan: "A", Gender: "Lelaki", Age: 53, SumCovered: 350000, Price: 550 },
+    { Plan: "B", Gender: "Lelaki", Age: 53, SumCovered: 350000, Price: 526 },
+    { Plan: "C", Gender: "Lelaki", Age: 53, SumCovered: 350000, Price: 534 },
+    { Plan: "A", Gender: "Perempuan", Age: 53, SumCovered: 350000, Price: 433 },
+    { Plan: "B", Gender: "Perempuan", Age: 53, SumCovered: 350000, Price: 341 },
+    { Plan: "C", Gender: "Perempuan", Age: 53, SumCovered: 350000, Price: 404 },
+    { Plan: "A", Gender: "Lelaki", Age: 54, SumCovered: 350000, Price: 616 },
+    { Plan: "B", Gender: "Lelaki", Age: 54, SumCovered: 350000, Price: 580 },
+    { Plan: "C", Gender: "Lelaki", Age: 54, SumCovered: 350000, Price: 547 },
+    { Plan: "A", Gender: "Perempuan", Age: 54, SumCovered: 350000, Price: 478 },
+    { Plan: "B", Gender: "Perempuan", Age: 54, SumCovered: 350000, Price: 379 },
+    { Plan: "C", Gender: "Perempuan", Age: 54, SumCovered: 350000, Price: 413 },
+    { Plan: "A", Gender: "Lelaki", Age: 55, SumCovered: 350000, Price: 691 },
+    { Plan: "B", Gender: "Lelaki", Age: 55, SumCovered: 350000, Price: 634 },
+    { Plan: "C", Gender: "Lelaki", Age: 55, SumCovered: 350000, Price: 562 },
+    { Plan: "A", Gender: "Perempuan", Age: 55, SumCovered: 350000, Price: 522 },
+    { Plan: "B", Gender: "Perempuan", Age: 55, SumCovered: 350000, Price: 422 },
+    { Plan: "C", Gender: "Perempuan", Age: 55, SumCovered: 350000, Price: 423 },
+    { Plan: "A", Gender: "Lelaki", Age: 56, SumCovered: 350000, Price: 774 },
+    { Plan: "B", Gender: "Lelaki", Age: 56, SumCovered: 350000, Price: 700 },
+    { Plan: "C", Gender: "Lelaki", Age: 56, SumCovered: 350000, Price: 579 },
+    { Plan: "A", Gender: "Perempuan", Age: 56, SumCovered: 350000, Price: 567 },
+    { Plan: "B", Gender: "Perempuan", Age: 56, SumCovered: 350000, Price: 464 },
+    { Plan: "C", Gender: "Perempuan", Age: 56, SumCovered: 350000, Price: 434 },
+    { Plan: "A", Gender: "Lelaki", Age: 57, SumCovered: 350000, Price: 866 },
+    { Plan: "B", Gender: "Lelaki", Age: 57, SumCovered: 350000, Price: 773 },
+    { Plan: "C", Gender: "Lelaki", Age: 57, SumCovered: 350000, Price: 602 },
+    { Plan: "A", Gender: "Perempuan", Age: 57, SumCovered: 350000, Price: 610 },
+    { Plan: "B", Gender: "Perempuan", Age: 57, SumCovered: 350000, Price: 514 },
+    { Plan: "C", Gender: "Perempuan", Age: 57, SumCovered: 350000, Price: 450 },
+    { Plan: "A", Gender: "Lelaki", Age: 58, SumCovered: 350000, Price: 970 },
+    { Plan: "B", Gender: "Lelaki", Age: 58, SumCovered: 350000, Price: 851 },
+    { Plan: "C", Gender: "Lelaki", Age: 58, SumCovered: 350000, Price: 638 },
+    { Plan: "A", Gender: "Perempuan", Age: 58, SumCovered: 350000, Price: 680 },
+    { Plan: "B", Gender: "Perempuan", Age: 58, SumCovered: 350000, Price: 572 },
+    { Plan: "C", Gender: "Perempuan", Age: 58, SumCovered: 350000, Price: 474 },
+    { Plan: "A", Gender: "Lelaki", Age: 59, SumCovered: 350000, Price: 1086 },
+    { Plan: "B", Gender: "Lelaki", Age: 59, SumCovered: 350000, Price: 939 },
+    { Plan: "C", Gender: "Lelaki", Age: 59, SumCovered: 350000, Price: 647 },
+    { Plan: "A", Gender: "Perempuan", Age: 59, SumCovered: 350000, Price: 759 },
+    { Plan: "B", Gender: "Perempuan", Age: 59, SumCovered: 350000, Price: 638 },
+    { Plan: "C", Gender: "Perempuan", Age: 59, SumCovered: 350000, Price: 478 },
+    { Plan: "A", Gender: "Lelaki", Age: 60, SumCovered: 350000, Price: 1218 },
+    { Plan: "B", Gender: "Lelaki", Age: 60, SumCovered: 350000, Price: 661 },
+    { Plan: "C", Gender: "Lelaki", Age: 60, SumCovered: 350000, Price: 656 },
+    { Plan: "A", Gender: "Perempuan", Age: 60, SumCovered: 350000, Price: 847 },
+    { Plan: "B", Gender: "Perempuan", Age: 60, SumCovered: 350000, Price: 426 },
+    { Plan: "C", Gender: "Perempuan", Age: 60, SumCovered: 350000, Price: 482 },
+    { Plan: "A", Gender: "Lelaki", Age: 21, SumCovered: 1000000, Price: 211 },
+    { Plan: "B", Gender: "Lelaki", Age: 21, SumCovered: 1000000, Price: 122 },
+    { Plan: "C", Gender: "Lelaki", Age: 21, SumCovered: 1000000, Price: 200 },
+    { Plan: "A", Gender: "Perempuan", Age: 21, SumCovered: 1000000, Price: 123 },
+    { Plan: "B", Gender: "Perempuan", Age: 21, SumCovered: 1000000, Price: 78 },
+    { Plan: "C", Gender: "Perempuan", Age: 21, SumCovered: 1000000, Price: 95 },
+    { Plan: "A", Gender: "Lelaki", Age: 22, SumCovered: 1000000, Price: 212 },
+    { Plan: "B", Gender: "Lelaki", Age: 22, SumCovered: 1000000, Price: 133 },
+    { Plan: "C", Gender: "Lelaki", Age: 22, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 22, SumCovered: 1000000, Price: 128 },
+    { Plan: "B", Gender: "Perempuan", Age: 22, SumCovered: 1000000, Price: 78 },
+    { Plan: "C", Gender: "Perempuan", Age: 22, SumCovered: 1000000, Price: 95 },
+    { Plan: "A", Gender: "Lelaki", Age: 23, SumCovered: 1000000, Price: 212 },
+    { Plan: "B", Gender: "Lelaki", Age: 23, SumCovered: 1000000, Price: 133 },
+    { Plan: "C", Gender: "Lelaki", Age: 23, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 23, SumCovered: 1000000, Price: 132 },
+    { Plan: "B", Gender: "Perempuan", Age: 23, SumCovered: 1000000, Price: 78 },
+    { Plan: "C", Gender: "Perempuan", Age: 23, SumCovered: 1000000, Price: 95 },
+    { Plan: "A", Gender: "Lelaki", Age: 24, SumCovered: 1000000, Price: 212 },
+    { Plan: "B", Gender: "Lelaki", Age: 24, SumCovered: 1000000, Price: 144 },
+    { Plan: "C", Gender: "Lelaki", Age: 24, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 24, SumCovered: 1000000, Price: 137 },
+    { Plan: "B", Gender: "Perempuan", Age: 24, SumCovered: 1000000, Price: 89 },
+    { Plan: "C", Gender: "Perempuan", Age: 24, SumCovered: 1000000, Price: 95 },
+    { Plan: "A", Gender: "Lelaki", Age: 25, SumCovered: 1000000, Price: 212 },
+    { Plan: "B", Gender: "Lelaki", Age: 25, SumCovered: 1000000, Price: 155 },
+    { Plan: "C", Gender: "Lelaki", Age: 25, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 25, SumCovered: 1000000, Price: 142 },
+    { Plan: "B", Gender: "Perempuan", Age: 25, SumCovered: 1000000, Price: 89 },
+    { Plan: "C", Gender: "Perempuan", Age: 25, SumCovered: 1000000, Price: 98 },
+    { Plan: "A", Gender: "Lelaki", Age: 26, SumCovered: 1000000, Price: 213 },
+    { Plan: "B", Gender: "Lelaki", Age: 26, SumCovered: 1000000, Price: 166 },
+    { Plan: "C", Gender: "Lelaki", Age: 26, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 26, SumCovered: 1000000, Price: 147 },
+    { Plan: "B", Gender: "Perempuan", Age: 26, SumCovered: 1000000, Price: 100 },
+    { Plan: "C", Gender: "Perempuan", Age: 26, SumCovered: 1000000, Price: 102 },
+    { Plan: "A", Gender: "Lelaki", Age: 27, SumCovered: 1000000, Price: 213 },
+    { Plan: "B", Gender: "Lelaki", Age: 27, SumCovered: 1000000, Price: 177 },
+    { Plan: "C", Gender: "Lelaki", Age: 27, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 27, SumCovered: 1000000, Price: 155 },
+    { Plan: "B", Gender: "Perempuan", Age: 27, SumCovered: 1000000, Price: 100 },
+    { Plan: "C", Gender: "Perempuan", Age: 27, SumCovered: 1000000, Price: 105 },
+    { Plan: "A", Gender: "Lelaki", Age: 28, SumCovered: 1000000, Price: 213 },
+    { Plan: "B", Gender: "Lelaki", Age: 28, SumCovered: 1000000, Price: 188 },
+    { Plan: "C", Gender: "Lelaki", Age: 28, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 28, SumCovered: 1000000, Price: 162 },
+    { Plan: "B", Gender: "Perempuan", Age: 28, SumCovered: 1000000, Price: 111 },
+    { Plan: "C", Gender: "Perempuan", Age: 28, SumCovered: 1000000, Price: 110 },
+    { Plan: "A", Gender: "Lelaki", Age: 29, SumCovered: 1000000, Price: 214 },
+    { Plan: "B", Gender: "Lelaki", Age: 29, SumCovered: 1000000, Price: 210 },
+    { Plan: "C", Gender: "Lelaki", Age: 29, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 29, SumCovered: 1000000, Price: 173 },
+    { Plan: "B", Gender: "Perempuan", Age: 29, SumCovered: 1000000, Price: 122 },
+    { Plan: "C", Gender: "Perempuan", Age: 29, SumCovered: 1000000, Price: 115 },
+    { Plan: "A", Gender: "Lelaki", Age: 30, SumCovered: 1000000, Price: 219 },
+    { Plan: "B", Gender: "Lelaki", Age: 30, SumCovered: 1000000, Price: 221 },
+    { Plan: "C", Gender: "Lelaki", Age: 30, SumCovered: 1000000, Price: 201 },
+    { Plan: "A", Gender: "Perempuan", Age: 30, SumCovered: 1000000, Price: 180 },
+    { Plan: "B", Gender: "Perempuan", Age: 30, SumCovered: 1000000, Price: 133 },
+    { Plan: "C", Gender: "Perempuan", Age: 30, SumCovered: 1000000, Price: 120 },
+    { Plan: "A", Gender: "Lelaki", Age: 31, SumCovered: 1000000, Price: 228 },
+    { Plan: "B", Gender: "Lelaki", Age: 31, SumCovered: 1000000, Price: 243 },
+    { Plan: "C", Gender: "Lelaki", Age: 31, SumCovered: 1000000, Price: 208 },
+    { Plan: "A", Gender: "Perempuan", Age: 31, SumCovered: 1000000, Price: 190 },
+    { Plan: "B", Gender: "Perempuan", Age: 31, SumCovered: 1000000, Price: 144 },
+    { Plan: "C", Gender: "Perempuan", Age: 31, SumCovered: 1000000, Price: 126 },
+    { Plan: "A", Gender: "Lelaki", Age: 32, SumCovered: 1000000, Price: 238 },
+    { Plan: "B", Gender: "Lelaki", Age: 32, SumCovered: 1000000, Price: 265 },
+    { Plan: "C", Gender: "Lelaki", Age: 32, SumCovered: 1000000, Price: 216 },
+    { Plan: "A", Gender: "Perempuan", Age: 32, SumCovered: 1000000, Price: 204 },
+    { Plan: "B", Gender: "Perempuan", Age: 32, SumCovered: 1000000, Price: 155 },
+    { Plan: "C", Gender: "Perempuan", Age: 32, SumCovered: 1000000, Price: 132 },
+    { Plan: "A", Gender: "Lelaki", Age: 33, SumCovered: 1000000, Price: 248 },
+    { Plan: "B", Gender: "Lelaki", Age: 33, SumCovered: 1000000, Price: 288 },
+    { Plan: "C", Gender: "Lelaki", Age: 33, SumCovered: 1000000, Price: 226 },
+    { Plan: "A", Gender: "Perempuan", Age: 33, SumCovered: 1000000, Price: 217 },
+    { Plan: "B", Gender: "Perempuan", Age: 33, SumCovered: 1000000, Price: 166 },
+    { Plan: "C", Gender: "Perempuan", Age: 33, SumCovered: 1000000, Price: 139 },
+    { Plan: "A", Gender: "Lelaki", Age: 34, SumCovered: 1000000, Price: 260 },
+    { Plan: "B", Gender: "Lelaki", Age: 34, SumCovered: 1000000, Price: 310 },
+    { Plan: "C", Gender: "Lelaki", Age: 34, SumCovered: 1000000, Price: 237 },
+    { Plan: "A", Gender: "Perempuan", Age: 34, SumCovered: 1000000, Price: 229 },
+    { Plan: "B", Gender: "Perempuan", Age: 34, SumCovered: 1000000, Price: 188 },
+    { Plan: "C", Gender: "Perempuan", Age: 34, SumCovered: 1000000, Price: 147 },
+    { Plan: "A", Gender: "Lelaki", Age: 35, SumCovered: 1000000, Price: 272 },
+    { Plan: "B", Gender: "Lelaki", Age: 35, SumCovered: 1000000, Price: 343 },
+    { Plan: "C", Gender: "Lelaki", Age: 35, SumCovered: 1000000, Price: 248 },
+    { Plan: "A", Gender: "Perempuan", Age: 35, SumCovered: 1000000, Price: 245 },
+    { Plan: "B", Gender: "Perempuan", Age: 35, SumCovered: 1000000, Price: 199 },
+    { Plan: "C", Gender: "Perempuan", Age: 35, SumCovered: 1000000, Price: 155 },
+    { Plan: "A", Gender: "Lelaki", Age: 36, SumCovered: 1000000, Price: 286 },
+    { Plan: "B", Gender: "Lelaki", Age: 36, SumCovered: 1000000, Price: 376 },
+    { Plan: "C", Gender: "Lelaki", Age: 36, SumCovered: 1000000, Price: 261 },
+    { Plan: "A", Gender: "Perempuan", Age: 36, SumCovered: 1000000, Price: 263 },
+    { Plan: "B", Gender: "Perempuan", Age: 36, SumCovered: 1000000, Price: 221 },
+    { Plan: "C", Gender: "Perempuan", Age: 36, SumCovered: 1000000, Price: 163 },
+    { Plan: "A", Gender: "Lelaki", Age: 37, SumCovered: 1000000, Price: 301 },
+    { Plan: "B", Gender: "Lelaki", Age: 37, SumCovered: 1000000, Price: 409 },
+    { Plan: "C", Gender: "Lelaki", Age: 37, SumCovered: 1000000, Price: 274 },
+    { Plan: "A", Gender: "Perempuan", Age: 37, SumCovered: 1000000, Price: 285 },
+    { Plan: "B", Gender: "Perempuan", Age: 37, SumCovered: 1000000, Price: 243 },
+    { Plan: "C", Gender: "Perempuan", Age: 37, SumCovered: 1000000, Price: 172 },
+    { Plan: "A", Gender: "Lelaki", Age: 38, SumCovered: 1000000, Price: 319 },
+    { Plan: "B", Gender: "Lelaki", Age: 38, SumCovered: 1000000, Price: 453 },
+    { Plan: "C", Gender: "Lelaki", Age: 38, SumCovered: 1000000, Price: 289 },
+    { Plan: "A", Gender: "Perempuan", Age: 38, SumCovered: 1000000, Price: 304 },
+    { Plan: "B", Gender: "Perempuan", Age: 38, SumCovered: 1000000, Price: 265 },
+    { Plan: "C", Gender: "Perempuan", Age: 38, SumCovered: 1000000, Price: 182 },
+    { Plan: "A", Gender: "Lelaki", Age: 39, SumCovered: 1000000, Price: 340 },
+    { Plan: "B", Gender: "Lelaki", Age: 39, SumCovered: 1000000, Price: 497 },
+    { Plan: "C", Gender: "Lelaki", Age: 39, SumCovered: 1000000, Price: 306 },
+    { Plan: "A", Gender: "Perempuan", Age: 39, SumCovered: 1000000, Price: 330 },
+    { Plan: "B", Gender: "Perempuan", Age: 39, SumCovered: 1000000, Price: 299 },
+    { Plan: "C", Gender: "Perempuan", Age: 39, SumCovered: 1000000, Price: 193 },
+    { Plan: "A", Gender: "Lelaki", Age: 40, SumCovered: 1000000, Price: 358 },
+    { Plan: "B", Gender: "Lelaki", Age: 40, SumCovered: 1000000, Price: 541 },
+    { Plan: "C", Gender: "Lelaki", Age: 40, SumCovered: 1000000, Price: 488 },
+    { Plan: "A", Gender: "Perempuan", Age: 40, SumCovered: 1000000, Price: 363 },
+    { Plan: "B", Gender: "Perempuan", Age: 40, SumCovered: 1000000, Price: 332 },
+    { Plan: "C", Gender: "Perempuan", Age: 40, SumCovered: 1000000, Price: 306 },
+    { Plan: "A", Gender: "Lelaki", Age: 41, SumCovered: 1000000, Price: 381 },
+    { Plan: "B", Gender: "Lelaki", Age: 41, SumCovered: 1000000, Price: 597 },
+    { Plan: "C", Gender: "Lelaki", Age: 41, SumCovered: 1000000, Price: 495 },
+    { Plan: "A", Gender: "Perempuan", Age: 41, SumCovered: 1000000, Price: 372 },
+    { Plan: "B", Gender: "Perempuan", Age: 41, SumCovered: 1000000, Price: 365 },
+    { Plan: "C", Gender: "Perempuan", Age: 41, SumCovered: 1000000, Price: 310 },
+    { Plan: "A", Gender: "Lelaki", Age: 42, SumCovered: 1000000, Price: 397 },
+    { Plan: "B", Gender: "Lelaki", Age: 42, SumCovered: 1000000, Price: 652 },
+    { Plan: "C", Gender: "Lelaki", Age: 42, SumCovered: 1000000, Price: 501 },
+    { Plan: "A", Gender: "Perempuan", Age: 42, SumCovered: 1000000, Price: 375 },
+    { Plan: "B", Gender: "Perempuan", Age: 42, SumCovered: 1000000, Price: 409 },
+    { Plan: "C", Gender: "Perempuan", Age: 42, SumCovered: 1000000, Price: 314 },
+    { Plan: "A", Gender: "Lelaki", Age: 43, SumCovered: 1000000, Price: 415 },
+    { Plan: "B", Gender: "Lelaki", Age: 43, SumCovered: 1000000, Price: 718 },
+    { Plan: "C", Gender: "Lelaki", Age: 43, SumCovered: 1000000, Price: 506 },
+    { Plan: "A", Gender: "Perempuan", Age: 43, SumCovered: 1000000, Price: 381 },
+    { Plan: "B", Gender: "Perempuan", Age: 43, SumCovered: 1000000, Price: 453 },
+    { Plan: "C", Gender: "Perempuan", Age: 43, SumCovered: 1000000, Price: 318 },
+    { Plan: "A", Gender: "Lelaki", Age: 44, SumCovered: 1000000, Price: 434 },
+    { Plan: "B", Gender: "Lelaki", Age: 44, SumCovered: 1000000, Price: 795 },
+    { Plan: "C", Gender: "Lelaki", Age: 44, SumCovered: 1000000, Price: 510 },
+    { Plan: "A", Gender: "Perempuan", Age: 44, SumCovered: 1000000, Price: 387 },
+    { Plan: "B", Gender: "Perempuan", Age: 44, SumCovered: 1000000, Price: 497 },
+    { Plan: "C", Gender: "Perempuan", Age: 44, SumCovered: 1000000, Price: 320 },
+    { Plan: "A", Gender: "Lelaki", Age: 45, SumCovered: 1000000, Price: 455 },
+    { Plan: "B", Gender: "Lelaki", Age: 45, SumCovered: 1000000, Price: 873 },
+    { Plan: "C", Gender: "Lelaki", Age: 45, SumCovered: 1000000, Price: 513 },
+    { Plan: "A", Gender: "Perempuan", Age: 45, SumCovered: 1000000, Price: 392 },
+    { Plan: "B", Gender: "Perempuan", Age: 45, SumCovered: 1000000, Price: 552 },
+    { Plan: "C", Gender: "Perempuan", Age: 45, SumCovered: 1000000, Price: 323 },
+    { Plan: "A", Gender: "Lelaki", Age: 46, SumCovered: 1000000, Price: 477 },
+    { Plan: "B", Gender: "Lelaki", Age: 46, SumCovered: 1000000, Price: 961 },
+    { Plan: "C", Gender: "Lelaki", Age: 46, SumCovered: 1000000, Price: 515 },
+    { Plan: "A", Gender: "Perempuan", Age: 46, SumCovered: 1000000, Price: 414 },
+    { Plan: "B", Gender: "Perempuan", Age: 46, SumCovered: 1000000, Price: 619 },
+    { Plan: "C", Gender: "Perempuan", Age: 46, SumCovered: 1000000, Price: 325 },
+    { Plan: "A", Gender: "Lelaki", Age: 47, SumCovered: 1000000, Price: 500 },
+    { Plan: "B", Gender: "Lelaki", Age: 47, SumCovered: 1000000, Price: 1060 },
+    { Plan: "C", Gender: "Lelaki", Age: 47, SumCovered: 1000000, Price: 518 },
+    { Plan: "A", Gender: "Perempuan", Age: 47, SumCovered: 1000000, Price: 426 },
+    { Plan: "B", Gender: "Perempuan", Age: 47, SumCovered: 1000000, Price: 685 },
+    { Plan: "C", Gender: "Perempuan", Age: 47, SumCovered: 1000000, Price: 327 },
+    { Plan: "A", Gender: "Lelaki", Age: 48, SumCovered: 1000000, Price: 540 },
+    { Plan: "B", Gender: "Lelaki", Age: 48, SumCovered: 1000000, Price: 1171 },
+    { Plan: "C", Gender: "Lelaki", Age: 48, SumCovered: 1000000, Price: 521 },
+    { Plan: "A", Gender: "Perempuan", Age: 48, SumCovered: 1000000, Price: 451 },
+    { Plan: "B", Gender: "Perempuan", Age: 48, SumCovered: 1000000, Price: 762 },
+    { Plan: "C", Gender: "Perempuan", Age: 48, SumCovered: 1000000, Price: 328 },
+    { Plan: "A", Gender: "Lelaki", Age: 49, SumCovered: 1000000, Price: 591 },
+    { Plan: "B", Gender: "Lelaki", Age: 49, SumCovered: 1000000, Price: 1292 },
+    { Plan: "C", Gender: "Lelaki", Age: 49, SumCovered: 1000000, Price: 524 },
+    { Plan: "A", Gender: "Perempuan", Age: 49, SumCovered: 1000000, Price: 472 },
+    { Plan: "B", Gender: "Perempuan", Age: 49, SumCovered: 1000000, Price: 851 },
+    { Plan: "C", Gender: "Perempuan", Age: 49, SumCovered: 1000000, Price: 330 },
+    { Plan: "A", Gender: "Lelaki", Age: 50, SumCovered: 1000000, Price: 1033 },
+    { Plan: "B", Gender: "Lelaki", Age: 50, SumCovered: 1000000, Price: 851 },
+    { Plan: "C", Gender: "Lelaki", Age: 50, SumCovered: 1000000, Price: 487 },
+    { Plan: "A", Gender: "Perempuan", Age: 50, SumCovered: 1000000, Price: 793 },
+    { Plan: "B", Gender: "Perempuan", Age: 50, SumCovered: 1000000, Price: 519 },
+    { Plan: "C", Gender: "Perempuan", Age: 50, SumCovered: 1000000, Price: 309 },
+    { Plan: "A", Gender: "Lelaki", Age: 51, SumCovered: 1000000, Price: 1147 },
+    { Plan: "B", Gender: "Lelaki", Age: 51, SumCovered: 1000000, Price: 928 },
+    { Plan: "C", Gender: "Lelaki", Age: 51, SumCovered: 1000000, Price: 536 },
+    { Plan: "A", Gender: "Perempuan", Age: 51, SumCovered: 1000000, Price: 902 },
+    { Plan: "B", Gender: "Perempuan", Age: 51, SumCovered: 1000000, Price: 575 },
+    { Plan: "C", Gender: "Perempuan", Age: 51, SumCovered: 1000000, Price: 345 },
+    { Plan: "A", Gender: "Lelaki", Age: 52, SumCovered: 1000000, Price: 1278 },
+    { Plan: "B", Gender: "Lelaki", Age: 52, SumCovered: 1000000, Price: 1016 },
+    { Plan: "C", Gender: "Lelaki", Age: 52, SumCovered: 1000000, Price: 591 },
+    { Plan: "A", Gender: "Perempuan", Age: 52, SumCovered: 1000000, Price: 1013 },
+    { Plan: "B", Gender: "Perempuan", Age: 52, SumCovered: 1000000, Price: 641 },
+    { Plan: "C", Gender: "Perempuan", Age: 52, SumCovered: 1000000, Price: 384 },
+    { Plan: "A", Gender: "Lelaki", Age: 53, SumCovered: 1000000, Price: 1429 },
+    { Plan: "B", Gender: "Lelaki", Age: 53, SumCovered: 1000000, Price: 1116 },
+    { Plan: "C", Gender: "Lelaki", Age: 53, SumCovered: 1000000, Price: 651 },
+    { Plan: "A", Gender: "Perempuan", Age: 53, SumCovered: 1000000, Price: 1125 },
+    { Plan: "B", Gender: "Perempuan", Age: 53, SumCovered: 1000000, Price: 707 },
+    { Plan: "C", Gender: "Perempuan", Age: 53, SumCovered: 1000000, Price: 427 },
+    { Plan: "A", Gender: "Lelaki", Age: 54, SumCovered: 1000000, Price: 1599 },
+    { Plan: "B", Gender: "Lelaki", Age: 54, SumCovered: 1000000, Price: 1237 },
+    { Plan: "C", Gender: "Lelaki", Age: 54, SumCovered: 1000000, Price: 726 },
+    { Plan: "A", Gender: "Perempuan", Age: 54, SumCovered: 1000000, Price: 1241 },
+    { Plan: "B", Gender: "Perempuan", Age: 54, SumCovered: 1000000, Price: 795 },
+    { Plan: "C", Gender: "Perempuan", Age: 54, SumCovered: 1000000, Price: 476 },
+    { Plan: "A", Gender: "Lelaki", Age: 55, SumCovered: 1000000, Price: 1794 },
+    { Plan: "B", Gender: "Lelaki", Age: 55, SumCovered: 1000000, Price: 1358 },
+    { Plan: "C", Gender: "Lelaki", Age: 55, SumCovered: 1000000, Price: 809 },
+    { Plan: "A", Gender: "Perempuan", Age: 55, SumCovered: 1000000, Price: 1356 },
+    { Plan: "B", Gender: "Perempuan", Age: 55, SumCovered: 1000000, Price: 884 },
+    { Plan: "C", Gender: "Perempuan", Age: 55, SumCovered: 1000000, Price: 529 },
+    { Plan: "A", Gender: "Lelaki", Age: 56, SumCovered: 1000000, Price: 2010 },
+    { Plan: "B", Gender: "Lelaki", Age: 56, SumCovered: 1000000, Price: 1502 },
+    { Plan: "C", Gender: "Lelaki", Age: 56, SumCovered: 1000000, Price: 901 },
+    { Plan: "A", Gender: "Perempuan", Age: 56, SumCovered: 1000000, Price: 1474 },
+    { Plan: "B", Gender: "Perempuan", Age: 56, SumCovered: 1000000, Price: 983 },
+    { Plan: "C", Gender: "Perempuan", Age: 56, SumCovered: 1000000, Price: 589 },
+    { Plan: "A", Gender: "Lelaki", Age: 57, SumCovered: 1000000, Price: 2250 },
+    { Plan: "B", Gender: "Lelaki", Age: 57, SumCovered: 1000000, Price: 1656 },
+    { Plan: "C", Gender: "Lelaki", Age: 57, SumCovered: 1000000, Price: 1003 },
+    { Plan: "A", Gender: "Perempuan", Age: 57, SumCovered: 1000000, Price: 1586 },
+    { Plan: "B", Gender: "Perempuan", Age: 57, SumCovered: 1000000, Price: 1093 },
+    { Plan: "C", Gender: "Perempuan", Age: 57, SumCovered: 1000000, Price: 656 },
+    { Plan: "A", Gender: "Lelaki", Age: 58, SumCovered: 1000000, Price: 2521 },
+    { Plan: "B", Gender: "Lelaki", Age: 58, SumCovered: 1000000, Price: 1833 },
+    { Plan: "C", Gender: "Lelaki", Age: 58, SumCovered: 1000000, Price: 1116 },
+    { Plan: "A", Gender: "Perempuan", Age: 58, SumCovered: 1000000, Price: 1767 },
+    { Plan: "B", Gender: "Perempuan", Age: 58, SumCovered: 1000000, Price: 1215 },
+    { Plan: "C", Gender: "Perempuan", Age: 58, SumCovered: 1000000, Price: 731 },
+    { Plan: "A", Gender: "Lelaki", Age: 59, SumCovered: 1000000, Price: 2821 },
+    { Plan: "B", Gender: "Lelaki", Age: 59, SumCovered: 1000000, Price: 2032 },
+    { Plan: "C", Gender: "Lelaki", Age: 59, SumCovered: 1000000, Price: 1240 },
+    { Plan: "A", Gender: "Perempuan", Age: 59, SumCovered: 1000000, Price: 1972 },
+    { Plan: "B", Gender: "Perempuan", Age: 59, SumCovered: 1000000, Price: 1358 },
+    { Plan: "C", Gender: "Perempuan", Age: 59, SumCovered: 1000000, Price: 816 },
+    { Plan: "A", Gender: "Lelaki", Age: 60, SumCovered: 1000000, Price: 3164 },
+    { Plan: "B", Gender: "Lelaki", Age: 60, SumCovered: 500000, Price: 944 },
+    { Plan: "C", Gender: "Lelaki", Age: 60, SumCovered: 1000000, Price: 1382 },
+    { Plan: "A", Gender: "Perempuan", Age: 60, SumCovered: 1000000, Price: 2200 },
+    { Plan: "B", Gender: "Perempuan", Age: 60, SumCovered: 1000000, Price: 608 },
+    { Plan: "C", Gender: "Perempuan", Age: 60, SumCovered: 1000000, Price: 914 }
+    ];
+
+
+    function populateAgeDropdown(product) {
+        const ageSelect = document.getElementById('age');
+        while (ageSelect.options.length > 1) ageSelect.remove(1);
+        const max = product === 'Hibah Takaful' ? 60 : 70;
+        const min = product === 'Hibah Takaful' ? 21 : 1;
+        for (let i = min; i <= max; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + ' tahun';
+            ageSelect.appendChild(option);
+        }
+    }
+
+    function updatePlanDescriptions(product, sumCovered = null) {
+        const kelebihanRow = document.getElementById('kelebihan-row');
+        if (product === 'Hibah Takaful') {
+            kelebihanRow.cells[1].innerHTML = 'Perlindungan berterusan hingga usia lanjut pada kadar paling rendah';
+            kelebihanRow.cells[2].innerHTML = 'Perlindungan tempoh tetap dengan kadar yang stabil';
+            kelebihanRow.cells[3].innerHTML = 'Perlindungan seimbang dengan waiver penyakit kritikal';
+            if (sumCovered) {
+                document.getElementById('plan-a-coverage-main').textContent = 'RM' + sumCovered.toLocaleString();
+                document.getElementById('plan-b-coverage-main').textContent = 'RM' + sumCovered.toLocaleString();
+                document.getElementById('plan-c-coverage-main').textContent = 'RM' + sumCovered.toLocaleString();
+            }
+        } else {
+            kelebihanRow.cells[1].innerHTML = 'Individu muda yang nak perlindungan panjang dengan bajet minimum';
+            kelebihanRow.cells[2].innerHTML = 'Sesuai untuk profesional atau ketua keluarga yang mahukan perlindungan pendapatan lebih lama';
+            kelebihanRow.cells[3].innerHTML = 'Individu berkeluarga atau berpendapatan sederhana yang nak perlindungan stabil';
+            document.getElementById('plan-a-coverage-main').textContent = 'RM180,000';
+            document.getElementById('plan-b-coverage-main').textContent = 'RM1,000,000';
+            document.getElementById('plan-c-coverage-main').textContent = 'RM1,500,000';
+        }
+    }
+
+    document.getElementById('product').addEventListener('change', function() {
+        const product = this.value;
+        currentProduct = product;
+        const sumCoveredGroup = document.getElementById('sum-covered-group');
+        sumCoveredGroup.style.display = product === 'Hibah Takaful' ? 'block' : 'none';
+        populateAgeDropdown(product);
+        updateCoverageHeaders(product);
+        updatePlanDescriptions(product);
+        updateCTAButtons(product);
+        hideMessages();
+        document.getElementById('age').value = '';
+    });
+
+    document.getElementById('sum-covered').addEventListener('change', function() {
+        const product = document.getElementById('product').value;
+        const sumCovered = this.value ? parseInt(this.value) : null;
+        if (product === 'Hibah Takaful') updatePlanDescriptions(product, sumCovered);
+    });
+
+    function updateCoverageHeaders(product) {
+        const label = product === 'Hibah Takaful' ? 'Manfaat Kematian' : 'Had Tahunan';
+        document.getElementById('coverage-label').textContent = label;
+        document.getElementById('comparison-header').textContent = label;
+        document.getElementById('coverage-header').textContent = label;
+    }
+
+    function showError(message) {
+        const el = document.getElementById('error-message');
+        el.textContent = message;
+        el.style.display = 'block';
+        document.getElementById('success-message').style.display = 'none';
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function showSuccess(message) {
+        const el = document.getElementById('success-message');
+        el.textContent = message;
+        el.style.display = 'block';
+        document.getElementById('error-message').style.display = 'none';
+    }
+
+    function hideMessages() {
+        document.getElementById('error-message').style.display = 'none';
+        document.getElementById('success-message').style.display = 'none';
+    }
+
+    function showLoading() { document.getElementById('loading').style.display = 'block'; }
+    function hideLoading()  { document.getElementById('loading').style.display = 'none'; }
+    function showDisclaimer() { document.getElementById('results-disclaimer').style.display = 'block'; }
+
+    document.getElementById('calculate-btn').addEventListener('click', function() {
+        const product    = document.getElementById('product').value;
+        const gender     = document.getElementById('gender').value;
+        const age        = parseInt(document.getElementById('age').value);
+        const sumCovered = document.getElementById('sum-covered').value ? parseInt(document.getElementById('sum-covered').value) : null;
+
+        hideMessages();
+
+        if (!product)  { showError('Sila pilih jenis produk.'); return; }
+        if (!gender)   { showError('Sila pilih jantina anda.'); return; }
+        if (!age)      { showError('Sila pilih umur anda.'); return; }
+        if (product === 'Hibah Takaful' && !sumCovered) { showError('Sila pilih jumlah perlindungan untuk Hibah Takaful.'); return; }
+
+        currentProduct = product;
+        updateCoverageHeaders(product);
+        updatePlanDescriptions(product, sumCovered);
+        updateCTAButtons(product);
+        showLoading();
+
+        setTimeout(() => {
+            let records = [];
+            if (product === 'Medical Card') {
+                records = medicalCardDB.filter(item => item.Gender === gender && item.Age === age);
+            } else {
+                records = hibahTakafulDB.filter(item => item.Gender === gender && item.Age === age && item.SumCovered === sumCovered);
+            }
+
+            if (records.length > 0) {
+                const sorted = [...records].sort((a, b) => a.Price - b.Price);
+                const planAData = sorted[0] || null;
+                const planBData = sorted[1] || null;
+                const planCData = sorted[2] || null;
+
+                if (planCData) {
+                    document.getElementById('product-type').textContent = "Pelan C";
+                    document.getElementById('annual-premium').textContent = `RM${planCData.Price}`;
+                    document.getElementById('coverage-amount').textContent = `RM${planCData.SumCovered.toLocaleString()}`;
+                }
+
+                const lowestPrice  = planAData ? planAData.Price : '-';
+                const highestPrice = planCData ? planCData.Price : (planBData ? planBData.Price : '-');
+
+                // ✅ FIX: Hantar umur sebenar (nombor), bukan bracket
+                currentResult = {
+                    hibah:   getHibahCode(sumCovered),
+                    umur:    age,                              // ← nombor terus, contoh: 35
+                    gender:  gender,
+                    caruman: `RM${lowestPrice} – RM${highestPrice}`
+                };
+
+                document.getElementById('plan-a-price').textContent    = planAData ? `RM${planAData.Price}` : '-';
+                document.getElementById('plan-a-coverage').textContent  = planAData ? `RM${planAData.SumCovered.toLocaleString()}` : '-';
+                document.getElementById('plan-b-price').textContent    = planBData ? `RM${planBData.Price}` : '-';
+                document.getElementById('plan-b-coverage').textContent  = planBData ? `RM${planBData.SumCovered.toLocaleString()}` : '-';
+                document.getElementById('plan-c-price').textContent    = planCData ? `RM${planCData.Price}` : '-';
+                document.getElementById('plan-c-coverage').textContent  = planCData ? `RM${planCData.SumCovered.toLocaleString()}` : '-';
+
+                document.getElementById('plan-comparison').style.display = 'block';
+                showDisclaimer();
+                showSuccess('Pengiraan sumbangan berjaya! Lihat cadangan pelan di bawah.');
+                document.getElementById('plan-comparison-results').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                showError('Tiada maklumat sumbangan ditemui untuk kriteria yang dipilih.');
+            }
+
+            hideLoading();
+        }, 1000);
+    });
+
+    document.querySelectorAll('select').forEach(select => {
+        select.addEventListener('change', function() { hideMessages(); });
+    });
+</script>
+
+</body>
+
+</html>
